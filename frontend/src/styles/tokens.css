@@ -1,0 +1,76 @@
+/* ------------------------------------------------------------------------
+   FridgeSense design tokens - "cold chain" system.
+
+   The organising idea: temperature is meaning. Cool tones (petrol, frost,
+   teal) say "fresh, safe, in hand". Warm tones (amber -> orange -> rose) are
+   spent only on spoilage urgency, so a glance at colour reads as a glance at
+   risk. Nothing warm appears as decoration.
+   --------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* Surfaces - cool, not cream. */
+  --frost:      #EDF3F1;   /* app background */
+  --frost-2:    #E4EDEA;   /* recessed strips, table headers */
+  --paper:      #FFFFFF;   /* cards */
+  --petrol:     #0C3B3C;   /* brand ink, sidebar */
+  --petrol-2:   #082B2C;   /* sidebar gradient foot */
+  --petrol-lift:#12504F;   /* hover on petrol */
+
+  /* Text */
+  --ink:        #14231F;   /* primary text (cool near-black) */
+  --ink-soft:   #375350;   /* secondary */
+  --muted:      #6A827E;   /* tertiary, captions */
+  --on-petrol:  #E9F3F0;   /* text on petrol */
+  --on-petrol-dim:#9FBFBB;
+
+  /* Lines & shadow */
+  --line:       #D8E4E1;
+  --line-strong:#C3D4D0;
+  --shadow-sm:  0 1px 2px rgba(12, 59, 60, 0.06);
+  --shadow-md:  0 6px 20px -8px rgba(12, 59, 60, 0.22);
+  --shadow-lg:  0 24px 60px -24px rgba(8, 43, 44, 0.42);
+
+  /* Freshness ramp - the temperature scale. */
+  --fresh:      #12A594;   /* low risk  */
+  --fresh-deep: #0B7E71;
+  --warm-med:   #E5A000;   /* medium    */
+  --warm-high:  #EF7215;   /* high      */
+  --hot:        #E11D48;   /* critical  */
+
+  /* Washes for band chips / row tints (low-alpha of the ramp). */
+  --fresh-wash: #DBefe9;
+  --med-wash:   #FBEFD2;
+  --high-wash:  #FBE3D3;
+  --hot-wash:   #FBDBE2;
+
+  /* Accent used for primary actions & focus - a confident teal, not the
+     terracotta/acid-green defaults. */
+  --accent:     #0E8C7E;
+  --accent-ink: #063f39;
+  --focus:      #12A594;
+
+  /* Type */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --step--1: 0.82rem;
+  --step-0:  0.95rem;
+  --step-1:  1.15rem;
+  --step-2:  1.45rem;
+  --step-3:  1.9rem;
+  --step-4:  2.6rem;
+  --step-5:  3.6rem;
+
+  /* Space & shape */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+  --sidebar-w: 244px;
+  --maxw: 1180px;
+}

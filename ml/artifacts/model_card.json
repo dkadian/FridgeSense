@@ -1,0 +1,630 @@
+{
+ "model_name": "FridgeSense spoilage-risk classifier",
+ "task": "Binary classification - will this pantry item be thrown away instead of eaten?",
+ "intended_use": "Ranks a household's pantry so the most at-risk food is used first, and quantifies the avoided emissions when it is.",
+ "algorithm": "Gradient-boosted decision trees on the logistic loss, implemented from scratch on NumPy (XGBoost-style regularised split gain and Newton-step leaf weights, histogram binning, row and column subsampling, early stopping).",
+ "features": [
+  "days_to_expiry",
+  "shelf_life_days",
+  "frac_life_remaining",
+  "days_since_purchase",
+  "frac_pack_remaining",
+  "days_of_stock_left",
+  "finish_ratio",
+  "storage_code",
+  "opened",
+  "perishability",
+  "days_of_stock",
+  "stock_vs_shelf",
+  "storage_mismatch",
+  "same_category_count",
+  "active_items_total",
+  "is_leftover",
+  "household_size",
+  "user_category_waste_rate",
+  "user_overall_waste_rate"
+ ],
+ "training_data": {
+  "source": "Behavioural simulator - ml/generate_dataset.py",
+  "rows": 71848,
+  "households": 520,
+  "split": "grouped by household, 80/20",
+  "positive_rate": 0.22388932190179267,
+  "calibration": "Aggregate item-level waste incidence calibrated by bisection to the UNEP Food Waste Index household benchmark of ~22%."
+ },
+ "limitations": [
+  "Trained on simulated outcomes because no public item-level household food-waste dataset with per-item labels exists; the model therefore encodes the simulator's documented causal assumptions rather than validated real-world behaviour.",
+  "Absolute probabilities should be read as a cold-start prior. The API records every real consumed/wasted outcome so the model can be retrained on genuine data.",
+  "Emission and water factors are category medians, so per-item impact figures are order-of-magnitude estimates, not audited measurements.",
+  "Discrimination is close to chance for long-life staples - see per_category_auc, where grains, snacks and beverages sit near or below 0.50 on small test folds with waste rates around 5%. There is little to predict when a food is almost never wasted, so for those categories the score should be read as the base rate and not as a finding about the item.",
+  "The model is given no absolute mass. Raw grams were removed after an earlier version learned that large packs mean waste and rated a 3.5 kg bag of flour with five months of life left at 0.34 for being a big bag. Quantity now enters only relative to the pack and to the household's own consumption, so 'a lot' means a lot for this kitchen rather than a lot in kilograms."
+ ],
+ "metrics_test": {
+  "n": 14237,
+  "positive_rate": 0.21893657371637282,
+  "roc_auc": 0.8359159736695725,
+  "average_precision": 0.6146393967788809,
+  "log_loss": 0.38318579712079565,
+  "brier_score": 0.11949168594542733,
+  "expected_calibration_error": 0.009607417453739794,
+  "at_threshold": {
+   "threshold": 0.3,
+   "accuracy": 0.7993257006391796,
+   "precision": 0.5313253012048192,
+   "recall": 0.7074109720885466,
+   "specificity": 0.825089928057554,
+   "f1": 0.6068528966561166,
+   "balanced_accuracy": 0.7662504500730503,
+   "confusion": {
+    "tp": 2205,
+    "tn": 9175,
+    "fp": 1945,
+    "fn": 912
+   }
+  },
+  "calibration": [
+   {
+    "bin": "0.0-0.1",
+    "n": 7133,
+    "mean_predicted": 0.0547123428995164,
+    "observed_rate": 0.0513108089163045
+   },
+   {
+    "bin": "0.1-0.2",
+    "n": 1525,
+    "mean_predicted": 0.14709423295064558,
+    "observed_rate": 0.12786885245901639
+   },
+   {
+    "bin": "0.2-0.3",
+    "n": 1429,
+    "mean_predicted": 0.2514779941644246,
+    "observed_rate": 0.2456263121063681
+   },
+   {
+    "bin": "0.3-0.4",
+    "n": 1252,
+    "mean_predicted": 0.34751264299586226,
+    "observed_rate": 0.35543130990415334
+   },
+   {
+    "bin": "0.4-0.5",
+    "n": 986,
+    "mean_predicted": 0.4470267496271909,
+    "observed_rate": 0.43914807302231235
+   },
+   {
+    "bin": "0.5-0.6",
+    "n": 599,
+    "mean_predicted": 0.5442668721057228,
+    "observed_rate": 0.5876460767946577
+   },
+   {
+    "bin": "0.6-0.7",
+    "n": 453,
+    "mean_predicted": 0.6502107672008635,
+    "observed_rate": 0.6710816777041942
+   },
+   {
+    "bin": "0.7-0.8",
+    "n": 675,
+    "mean_predicted": 0.7522438976452827,
+    "observed_rate": 0.7762962962962963
+   },
+   {
+    "bin": "0.8-0.9",
+    "n": 185,
+    "mean_predicted": 0.8242179471256208,
+    "observed_rate": 0.7945945945945946
+   }
+  ],
+  "lift": [
+   {
+    "decile": 1,
+    "n": 1424,
+    "waste_rate": 0.7338483146067416,
+    "lift": 3.3518763089689383
+   },
+   {
+    "decile": 2,
+    "n": 1424,
+    "waste_rate": 0.4859550561797753,
+    "lift": 2.219615699336369
+   },
+   {
+    "decile": 3,
+    "n": 1424,
+    "waste_rate": 0.35042134831460675,
+    "lift": 1.6005610317468901
+   },
+   {
+    "decile": 4,
+    "n": 1424,
+    "waste_rate": 0.24157303370786518,
+    "lift": 1.1033927753926458
+   },
+   {
+    "decile": 5,
+    "n": 1424,
+    "waste_rate": 0.12219101123595505,
+    "lift": 0.5581114619718615
+   },
+   {
+    "decile": 6,
+    "n": 1424,
+    "waste_rate": 0.05407303370786517,
+    "lift": 0.24698035960823755
+   },
+   {
+    "decile": 7,
+    "n": 1424,
+    "waste_rate": 0.051264044943820225,
+    "lift": 0.23415021105716027
+   },
+   {
+    "decile": 8,
+    "n": 1423,
+    "waste_rate": 0.05621925509486999,
+    "lift": 0.25678329637012004
+   },
+   {
+    "decile": 9,
+    "n": 1423,
+    "waste_rate": 0.035839775122979624,
+    "lift": 0.16369935143595155
+   },
+   {
+    "decile": 10,
+    "n": 1423,
+    "waste_rate": 0.05762473647224174,
+    "lift": 0.26320287877937304
+   }
+  ]
+ },
+ "baseline_metrics_test": {
+  "n": 14237,
+  "positive_rate": 0.21893657371637282,
+  "roc_auc": 0.8249405384258522,
+  "average_precision": 0.5974343607916353,
+  "log_loss": 0.40291244726442105,
+  "brier_score": 0.1252574138482853,
+  "expected_calibration_error": 0.02202230314793252,
+  "at_threshold": {
+   "threshold": 0.5,
+   "accuracy": 0.8258762379714828,
+   "precision": 0.7152496626180836,
+   "recall": 0.3400705806865576,
+   "specificity": 0.9620503597122302,
+   "f1": 0.46096977603826916,
+   "balanced_accuracy": 0.6510604701993938,
+   "confusion": {
+    "tp": 1060,
+    "tn": 10698,
+    "fp": 422,
+    "fn": 2057
+   }
+  },
+  "calibration": [
+   {
+    "bin": "0.0-0.1",
+    "n": 5209,
+    "mean_predicted": 0.052773983314447936,
+    "observed_rate": 0.05010558648492993
+   },
+   {
+    "bin": "0.1-0.2",
+    "n": 3229,
+    "mean_predicted": 0.14506978934455747,
+    "observed_rate": 0.10653453081449366
+   },
+   {
+    "bin": "0.2-0.3",
+    "n": 1975,
+    "mean_predicted": 0.24614152552838586,
+    "observed_rate": 0.24658227848101266
+   },
+   {
+    "bin": "0.3-0.4",
+    "n": 1461,
+    "mean_predicted": 0.347545419212262,
+    "observed_rate": 0.35728952772073924
+   },
+   {
+    "bin": "0.4-0.5",
+    "n": 881,
+    "mean_predicted": 0.4449599405022721,
+    "observed_rate": 0.5028376844494892
+   },
+   {
+    "bin": "0.5-0.6",
+    "n": 561,
+    "mean_predicted": 0.5441246897038149,
+    "observed_rate": 0.6399286987522281
+   },
+   {
+    "bin": "0.6-0.7",
+    "n": 344,
+    "mean_predicted": 0.6482131522187631,
+    "observed_rate": 0.7296511627906976
+   },
+   {
+    "bin": "0.7-0.8",
+    "n": 269,
+    "mean_predicted": 0.7465319686886539,
+    "observed_rate": 0.7472118959107806
+   },
+   {
+    "bin": "0.8-0.9",
+    "n": 173,
+    "mean_predicted": 0.8465140590358057,
+    "observed_rate": 0.7803468208092486
+   },
+   {
+    "bin": "0.9-1.0",
+    "n": 135,
+    "mean_predicted": 0.960844604888198,
+    "observed_rate": 0.8444444444444444
+   }
+  ],
+  "lift": [
+   {
+    "decile": 1,
+    "n": 1424,
+    "waste_rate": 0.7198033707865169,
+    "lift": 3.287725566213552
+   },
+   {
+    "decile": 2,
+    "n": 1424,
+    "waste_rate": 0.4691011235955056,
+    "lift": 2.142634808029905
+   },
+   {
+    "decile": 3,
+    "n": 1424,
+    "waste_rate": 0.32724719101123595,
+    "lift": 1.4947123062005025
+   },
+   {
+    "decile": 4,
+    "n": 1424,
+    "waste_rate": 0.23525280898876405,
+    "lift": 1.0745249411527218
+   },
+   {
+    "decile": 5,
+    "n": 1424,
+    "waste_rate": 0.1580056179775281,
+    "lift": 0.7216958559980968
+   },
+   {
+    "decile": 6,
+    "n": 1424,
+    "waste_rate": 0.0723314606741573,
+    "lift": 0.33037632519023985
+   },
+   {
+    "decile": 7,
+    "n": 1424,
+    "waste_rate": 0.06882022471910113,
+    "lift": 0.31433863950139324
+   },
+   {
+    "decile": 8,
+    "n": 1423,
+    "waste_rate": 0.04356992269852424,
+    "lift": 0.19900705468684302
+   },
+   {
+    "decile": 9,
+    "n": 1423,
+    "waste_rate": 0.04567814476458187,
+    "lift": 0.20863642830072252
+   },
+   {
+    "decile": 10,
+    "n": 1423,
+    "waste_rate": 0.049191848208011243,
+    "lift": 0.22468538432385501
+   }
+  ]
+ },
+ "model_comparison": [
+  {
+   "model": "Expiry-date heuristic",
+   "roc_auc": 0.7437451530594581,
+   "average_precision": 0.47073438740730145
+  },
+  {
+   "model": "Logistic regression",
+   "roc_auc": 0.8249405384258522,
+   "average_precision": 0.5974343607916353,
+   "log_loss": 0.40291244726442105,
+   "brier_score": 0.1252574138482853
+  },
+  {
+   "model": "Gradient boosting (ours)",
+   "roc_auc": 0.8359159736695725,
+   "average_precision": 0.6146393967788809,
+   "log_loss": 0.38318579712079565,
+   "brier_score": 0.11949168594542733
+  }
+ ],
+ "sklearn_crosscheck": null,
+ "feature_importances": [
+  {
+   "feature": "finish_ratio",
+   "importance": 0.7029287931061761
+  },
+  {
+   "feature": "stock_vs_shelf",
+   "importance": 0.06659365472612858
+  },
+  {
+   "feature": "frac_life_remaining",
+   "importance": 0.03973681718152794
+  },
+  {
+   "feature": "active_items_total",
+   "importance": 0.03318677693160034
+  },
+  {
+   "feature": "frac_pack_remaining",
+   "importance": 0.027747834409270544
+  },
+  {
+   "feature": "user_overall_waste_rate",
+   "importance": 0.026358639723417246
+  },
+  {
+   "feature": "storage_mismatch",
+   "importance": 0.01628070749441464
+  },
+  {
+   "feature": "days_to_expiry",
+   "importance": 0.015835735241512005
+  },
+  {
+   "feature": "shelf_life_days",
+   "importance": 0.014085628345184622
+  },
+  {
+   "feature": "days_of_stock_left",
+   "importance": 0.012403590040428989
+  },
+  {
+   "feature": "days_since_purchase",
+   "importance": 0.00950319809009911
+  },
+  {
+   "feature": "days_of_stock",
+   "importance": 0.009215802200786079
+  },
+  {
+   "feature": "user_category_waste_rate",
+   "importance": 0.008592180298799079
+  },
+  {
+   "feature": "household_size",
+   "importance": 0.008082354519687177
+  },
+  {
+   "feature": "same_category_count",
+   "importance": 0.0031090788595248358
+  },
+  {
+   "feature": "is_leftover",
+   "importance": 0.0027733037182582306
+  },
+  {
+   "feature": "perishability",
+   "importance": 0.0016235735194313073
+  },
+  {
+   "feature": "storage_code",
+   "importance": 0.001396121721043487
+  },
+  {
+   "feature": "opened",
+   "importance": 0.0005462098727095669
+  }
+ ],
+ "logistic_coefficients": [
+  {
+   "feature": "frac_pack_remaining",
+   "coefficient": 0.7039798397623196,
+   "odds_ratio_per_sd": 2.0217830897850515
+  },
+  {
+   "feature": "frac_life_remaining",
+   "coefficient": -0.6784879133876254,
+   "odds_ratio_per_sd": 0.50738362059542
+  },
+  {
+   "feature": "stock_vs_shelf",
+   "coefficient": 0.3397586333972138,
+   "odds_ratio_per_sd": 1.4046085240578783
+  },
+  {
+   "feature": "perishability",
+   "coefficient": 0.31078104491046027,
+   "odds_ratio_per_sd": 1.3644904263525521
+  },
+  {
+   "feature": "storage_mismatch",
+   "coefficient": 0.2757875148621964,
+   "odds_ratio_per_sd": 1.317567870690576
+  },
+  {
+   "feature": "finish_ratio",
+   "coefficient": -0.20544176193707037,
+   "odds_ratio_per_sd": 0.8142875157138654
+  },
+  {
+   "feature": "user_overall_waste_rate",
+   "coefficient": 0.14024829485951765,
+   "odds_ratio_per_sd": 1.15055944138884
+  },
+  {
+   "feature": "storage_code",
+   "coefficient": -0.1342013591084474,
+   "odds_ratio_per_sd": 0.8744139756568201
+  },
+  {
+   "feature": "days_of_stock",
+   "coefficient": 0.13043543492378787,
+   "odds_ratio_per_sd": 1.1393243769535595
+  },
+  {
+   "feature": "days_to_expiry",
+   "coefficient": -0.1258744886834752,
+   "odds_ratio_per_sd": 0.8817255063678734
+  },
+  {
+   "feature": "shelf_life_days",
+   "coefficient": -0.12275549182716337,
+   "odds_ratio_per_sd": 0.8844798986879323
+  },
+  {
+   "feature": "active_items_total",
+   "coefficient": 0.09528290490556716,
+   "odds_ratio_per_sd": 1.0999699980205189
+  },
+  {
+   "feature": "same_category_count",
+   "coefficient": 0.06845300971986011,
+   "odds_ratio_per_sd": 1.070850304212913
+  },
+  {
+   "feature": "days_since_purchase",
+   "coefficient": 0.06657133151329733,
+   "odds_ratio_per_sd": 1.0688372031311855
+  },
+  {
+   "feature": "user_category_waste_rate",
+   "coefficient": 0.059686792389063326,
+   "odds_ratio_per_sd": 1.0615040233345294
+  },
+  {
+   "feature": "days_of_stock_left",
+   "coefficient": -0.05000474556357563,
+   "odds_ratio_per_sd": 0.9512249103917161
+  },
+  {
+   "feature": "household_size",
+   "coefficient": -0.010075537544133813,
+   "odds_ratio_per_sd": 0.9899750506406583
+  },
+  {
+   "feature": "opened",
+   "coefficient": 0.00962397193893307,
+   "odds_ratio_per_sd": 1.0096704312783928
+  },
+  {
+   "feature": "is_leftover",
+   "coefficient": -0.004224939487801772,
+   "odds_ratio_per_sd": 0.9957839730130259
+  }
+ ],
+ "per_category_auc": [
+  {
+   "category": "bakery",
+   "n": 767,
+   "waste_rate": 0.3076923076923077,
+   "roc_auc": 0.7927958121867917
+  },
+  {
+   "category": "beverages",
+   "n": 180,
+   "waste_rate": 0.05,
+   "roc_auc": 0.30994152046783624
+  },
+  {
+   "category": "condiments",
+   "n": 519,
+   "waste_rate": 0.04238921001926782,
+   "roc_auc": 0.674775928297055
+  },
+  {
+   "category": "cooked_leftovers",
+   "n": 1062,
+   "waste_rate": 0.21563088512241055,
+   "roc_auc": 0.8082324632909933
+  },
+  {
+   "category": "dairy",
+   "n": 1485,
+   "waste_rate": 0.1696969696969697,
+   "roc_auc": 0.8035472907735681
+  },
+  {
+   "category": "eggs",
+   "n": 461,
+   "waste_rate": 0.13232104121475055,
+   "roc_auc": 0.7155327868852459
+  },
+  {
+   "category": "frozen",
+   "n": 257,
+   "waste_rate": 0.06614785992217899,
+   "roc_auc": 0.7377450980392157
+  },
+  {
+   "category": "fruits",
+   "n": 1735,
+   "waste_rate": 0.20634005763688762,
+   "roc_auc": 0.8429262870055947
+  },
+  {
+   "category": "grains",
+   "n": 943,
+   "waste_rate": 0.04984093319194061,
+   "roc_auc": 0.4762537993920973
+  },
+  {
+   "category": "herbs",
+   "n": 627,
+   "waste_rate": 0.30462519936204147,
+   "roc_auc": 0.7873577020990441
+  },
+  {
+   "category": "leafy_greens",
+   "n": 896,
+   "waste_rate": 0.29017857142857145,
+   "roc_auc": 0.8036223996129657
+  },
+  {
+   "category": "meat_fish",
+   "n": 637,
+   "waste_rate": 0.4897959183673469,
+   "roc_auc": 0.8012919132149902
+  },
+  {
+   "category": "nuts_oils",
+   "n": 357,
+   "waste_rate": 0.056022408963585436,
+   "roc_auc": 0.6275964391691394
+  },
+  {
+   "category": "pulses",
+   "n": 627,
+   "waste_rate": 0.07974481658692185,
+   "roc_auc": 0.6762911611785095
+  },
+  {
+   "category": "snacks",
+   "n": 380,
+   "waste_rate": 0.04473684210526316,
+   "roc_auc": 0.5292497164154918
+  },
+  {
+   "category": "vegetables",
+   "n": 3304,
+   "waste_rate": 0.3135593220338983,
+   "roc_auc": 0.8195457362124029
+  }
+ ],
+ "train_seconds": 5.56,
+ "trained_at": "2026-08-26T00:40:39",
+ "schema_version": 1
+}

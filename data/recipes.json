@@ -1,0 +1,2573 @@
+[
+ {
+  "id": "palak_paneer",
+  "title": "Palak Paneer",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 30,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "spinach",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "paneer",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "cream",
+    "grams": 40.0,
+    "optional": true
+   },
+   {
+    "id": "garam_masala",
+    "grams": 4.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Blanch spinach 2 minutes, shock in cold water, then blend to a coarse puree.",
+   "Fry onion, ginger, garlic and chilli in oil until golden; add tomato and cook until soft.",
+   "Stir in the puree and garam masala, simmer 5 minutes.",
+   "Add cubed paneer and cream, warm through and serve."
+  ],
+  "rescue_note": "The single best rescue for spinach that has started to wilt - blanching revives limp leaves."
+ },
+ {
+  "id": "methi_thepla",
+  "title": "Methi Thepla",
+  "cuisine": "Gujarati",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 35,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "methi",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "atta",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "besan",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "chilli_powder",
+    "grams": 4.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 40.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Chop fenugreek leaves finely and mix with flours, curd, spices and a little water.",
+   "Knead a soft dough and rest 10 minutes.",
+   "Roll thin discs and cook on a hot tawa with oil until both sides are speckled."
+  ],
+  "rescue_note": "Uses a full bunch of methi at once and the theplas keep for two days."
+ },
+ {
+  "id": "tomato_soup",
+  "title": "Fresh Tomato Soup",
+  "cuisine": "Continental",
+  "meal": "lunch",
+  "diet": "vegetarian",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "tomato",
+    "grams": 600.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "butter",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "cream",
+    "grams": 30.0,
+    "optional": true
+   },
+   {
+    "id": "sugar",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "salt",
+    "grams": 4.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Sweat onion and garlic in butter without browning.",
+   "Add roughly chopped tomatoes, a cup of water, sugar and salt; simmer 15 minutes.",
+   "Blend smooth, strain if you like, and finish with cream."
+  ],
+  "rescue_note": "Overripe or slightly soft tomatoes actually make a sweeter soup than firm ones."
+ },
+ {
+  "id": "veg_pulao",
+  "title": "Vegetable Pulao",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 35,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "rice",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "peas_fresh",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "beans_french",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "ghee",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Rinse and soak rice 20 minutes.",
+   "Fry onion in ghee until golden, add vegetables and garam masala, saute 3 minutes.",
+   "Add rice and 1.5x water, cook covered on low until done, then rest 5 minutes before fluffing."
+  ],
+  "rescue_note": "A flexible base - swap in whatever vegetables are closest to turning."
+ },
+ {
+  "id": "fried_rice_leftover",
+  "title": "Leftover Fried Rice",
+  "cuisine": "Indo-Chinese",
+  "meal": "lunch",
+  "diet": "vegan",
+  "minutes": 15,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "cooked_rice",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "spring_onion",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "cabbage",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 12.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Heat oil very hot, add garlic and the hardest vegetables first.",
+   "Toss in cabbage and capsicum for 2 minutes on high heat.",
+   "Add cold cooked rice, season, and stir-fry until every grain is coated. Finish with spring onion."
+  ],
+  "rescue_note": "Day-old rice fries better than fresh - this is the highest-value use of leftover rice."
+ },
+ {
+  "id": "dal_tadka",
+  "title": "Dal Tadka",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 40,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "toor_dal",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 12.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "ghee",
+    "grams": 25.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 15.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Pressure cook dal with turmeric and salt until soft.",
+   "Make a tempering of ghee, garlic, ginger, chilli, onion and tomato.",
+   "Pour the tempering over the dal, simmer 5 minutes and finish with coriander."
+  ],
+  "rescue_note": "Cook a big batch - dal freezes well and rescues you on a busy night."
+ },
+ {
+  "id": "mixed_veg_sabzi",
+  "title": "Mixed Vegetable Sabzi",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 30,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "potato",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "cauliflower",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "peas_fresh",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 4.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Fry onion until soft, add tomato and spices and cook to a paste.",
+   "Add potato and cauliflower with a splash of water, cover and cook 12 minutes.",
+   "Stir in peas, cook 3 more minutes and serve."
+  ],
+  "rescue_note": "The catch-all dish for a fridge with small amounts of many vegetables."
+ },
+ {
+  "id": "bhindi_masala",
+  "title": "Bhindi Masala",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "okra",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "besan",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "chilli_powder",
+    "grams": 4.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 30.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Wipe okra dry and slice; never wash after cutting or it turns slimy.",
+   "Fry okra on high heat until edges crisp, then remove.",
+   "Fry onion and tomato with spices, sprinkle besan, return okra and toss."
+  ],
+  "rescue_note": "Okra deteriorates fast - cook it within two days of buying."
+ },
+ {
+  "id": "baingan_bharta",
+  "title": "Baingan Bharta",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 40,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "brinjal",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 12.0,
+    "optional": false
+   },
+   {
+    "id": "mustard_oil",
+    "grams": 25.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 15.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Char the brinjal directly over a flame until the skin blisters and the flesh collapses.",
+   "Peel and mash roughly.",
+   "Fry garlic, onion, chilli and tomato in mustard oil, add the mash and cook 8 minutes.",
+   "Finish with plenty of coriander."
+  ],
+  "rescue_note": "Works even with a brinjal that has gone slightly soft."
+ },
+ {
+  "id": "aloo_gobi",
+  "title": "Aloo Gobi",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 30,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "potato",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "cauliflower",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Cut potato and cauliflower into even florets and cubes.",
+   "Fry with turmeric and salt, covered, stirring occasionally for 15 minutes.",
+   "Add tomato near the end so it does not make things soggy; finish with coriander."
+  ],
+  "rescue_note": "Cauliflower keeps a while but yellowing florets should be used immediately."
+ },
+ {
+  "id": "cabbage_poriyal",
+  "title": "Cabbage Poriyal",
+  "cuisine": "South Indian",
+  "meal": "lunch",
+  "diet": "vegan",
+  "minutes": 20,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "cabbage",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "coconut",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 15.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Shred cabbage finely.",
+   "Temper curry leaves and chilli in oil, add cabbage and a pinch of salt.",
+   "Cook uncovered 8 minutes so it stays crunchy, then stir through grated coconut."
+  ],
+  "rescue_note": "Half a cabbage sitting in the fridge becomes a full side dish in 20 minutes."
+ },
+ {
+  "id": "lauki_chana_dal",
+  "title": "Lauki Chana Dal",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 40,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "bottle_gourd",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "chana_dal",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "ghee",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 6.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Soak chana dal 30 minutes.",
+   "Pressure cook dal with diced lauki, tomato, turmeric and salt.",
+   "Finish with a ghee and chilli tempering."
+  ],
+  "rescue_note": "Bottle gourd is bulky and often half-used - this dish takes a whole one."
+ },
+ {
+  "id": "veg_upma",
+  "title": "Vegetable Upma",
+  "cuisine": "South Indian",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "suji",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "peas_fresh",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Dry roast semolina until it smells nutty, then set aside.",
+   "Temper curry leaves and chilli, add onion, carrot and peas and saute.",
+   "Add 3x water, bring to a boil, then rain in the semolina while stirring.",
+   "Cover and steam 3 minutes."
+  ],
+  "rescue_note": "Absorbs small leftover quantities of almost any vegetable."
+ },
+ {
+  "id": "poha",
+  "title": "Kanda Poha",
+  "cuisine": "Maharashtrian",
+  "meal": "breakfast",
+  "diet": "vegan",
+  "minutes": 20,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "poha",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "potato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "groundnut",
+    "grams": 40.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Rinse poha in a colander until just soft, never soaking.",
+   "Fry groundnuts, then temper curry leaves, chilli, onion and potato.",
+   "Fold in poha with turmeric and salt, steam 3 minutes, finish with lemon."
+  ],
+  "rescue_note": "A ten-rupee breakfast that clears leftover onions and potatoes."
+ },
+ {
+  "id": "besan_chilla",
+  "title": "Besan Chilla",
+  "cuisine": "North Indian",
+  "meal": "breakfast",
+  "diet": "vegan",
+  "minutes": 20,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "besan",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 6.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Whisk besan with water to a pouring batter; rest 10 minutes.",
+   "Stir in chopped onion, tomato, coriander and chilli.",
+   "Cook like a pancake on a hot tawa with a little oil."
+  ],
+  "rescue_note": "The fastest way to use up small bits of vegetables and a lot of coriander."
+ },
+ {
+  "id": "masala_omelette",
+  "title": "Masala Omelette",
+  "cuisine": "Indian",
+  "meal": "breakfast",
+  "diet": "egg",
+  "minutes": 10,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "eggs",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 6.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 12.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Beat eggs with salt until slightly frothy.",
+   "Mix in finely chopped onion, tomato, chilli and coriander.",
+   "Cook on medium heat, fold once the top is just set."
+  ],
+  "rescue_note": "Two minutes, and it uses eggs that are nearing their date."
+ },
+ {
+  "id": "egg_bhurji",
+  "title": "Egg Bhurji",
+  "cuisine": "Indian",
+  "meal": "dinner",
+  "diet": "egg",
+  "minutes": 15,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "eggs",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "butter",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Fry onion, capsicum and chilli in butter until soft.",
+   "Add tomato and cook until it breaks down.",
+   "Pour in beaten eggs and scramble on low heat so they stay creamy."
+  ],
+  "rescue_note": "Great for a half capsicum and a lone tomato."
+ },
+ {
+  "id": "paneer_bhurji",
+  "title": "Paneer Bhurji",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 20,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "paneer",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Crumble the paneer coarsely.",
+   "Fry onion, capsicum, chilli, then tomato until pulpy.",
+   "Add paneer, toss 3 minutes only - overcooking makes it rubbery."
+  ],
+  "rescue_note": "Paneer has a short fridge life; crumbling hides any slight firming."
+ },
+ {
+  "id": "chicken_curry",
+  "title": "Home Chicken Curry",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "non-veg",
+  "minutes": 45,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "chicken",
+    "grams": 600.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 6.0,
+    "optional": false
+   },
+   {
+    "id": "mustard_oil",
+    "grams": 30.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Marinate chicken in curd, ginger, garlic and salt for 20 minutes.",
+   "Brown onions deeply in mustard oil, add tomato and cook down.",
+   "Add chicken and marinade, cook covered 25 minutes, finish with garam masala."
+  ],
+  "rescue_note": "Raw chicken must be used within two days - cook or freeze it immediately."
+ },
+ {
+  "id": "fish_fry",
+  "title": "Tawa Fish Fry",
+  "cuisine": "Coastal",
+  "meal": "dinner",
+  "diet": "non-veg",
+  "minutes": 20,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "fish",
+    "grams": 500.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 25.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 4.0,
+    "optional": false
+   },
+   {
+    "id": "chilli_powder",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "suji",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "mustard_oil",
+    "grams": 40.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Marinate fish in lemon, turmeric, chilli and salt for 15 minutes.",
+   "Dust with semolina for crunch.",
+   "Shallow fry in mustard oil, 4 minutes a side, without moving it around."
+  ],
+  "rescue_note": "Fish is the most perishable item in any fridge - cook the day you buy."
+ },
+ {
+  "id": "prawn_masala",
+  "title": "Prawn Masala",
+  "cuisine": "Coastal",
+  "meal": "dinner",
+  "diet": "non-veg",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "prawns",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "coconut",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "chilli_powder",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Fry garlic and onion, add tomato and spices and cook to a thick masala.",
+   "Add prawns and cook only 5 minutes until they curl and turn opaque.",
+   "Stir in grated coconut and take off the heat."
+  ],
+  "rescue_note": "Prawns carry a very high carbon footprint, so wasting them is especially costly."
+ },
+ {
+  "id": "mutton_curry",
+  "title": "Slow Mutton Curry",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "non-veg",
+  "minutes": 90,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "mutton",
+    "grams": 700.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 8.0,
+    "optional": false
+   },
+   {
+    "id": "mustard_oil",
+    "grams": 40.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Marinate mutton in curd, ginger and garlic for an hour.",
+   "Brown onions slowly in mustard oil until deep brown.",
+   "Add mutton, sear, then pressure cook 25 minutes with a cup of water.",
+   "Reduce the gravy and finish with garam masala."
+  ],
+  "rescue_note": "Mutton has the highest footprint in the catalog after beef - portion carefully."
+ },
+ {
+  "id": "veg_sandwich",
+  "title": "Grilled Veg Sandwich",
+  "cuisine": "Continental",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 12,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "bread",
+    "grams": 160.0,
+    "optional": false
+   },
+   {
+    "id": "cucumber",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "butter",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "cheese",
+    "grams": 40.0,
+    "optional": false
+   },
+   {
+    "id": "mayonnaise",
+    "grams": 20.0,
+    "optional": true
+   }
+  ],
+  "steps": [
+   "Butter the bread on the outside for a crisp grill.",
+   "Layer thin cucumber, tomato and capsicum with cheese and a little seasoning.",
+   "Grill or pan-press until golden."
+  ],
+  "rescue_note": "Bread staling? Grilling completely hides it."
+ },
+ {
+  "id": "french_toast",
+  "title": "French Toast",
+  "cuisine": "Continental",
+  "meal": "breakfast",
+  "diet": "egg",
+  "minutes": 12,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "bread",
+    "grams": 160.0,
+    "optional": false
+   },
+   {
+    "id": "eggs",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "sugar",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "butter",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Whisk eggs, milk and sugar.",
+   "Soak each slice 10 seconds a side.",
+   "Fry in butter until deep golden."
+  ],
+  "rescue_note": "The classic rescue for bread that is one day past its best."
+ },
+ {
+  "id": "bread_upma",
+  "title": "Bread Upma",
+  "cuisine": "Indian",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 15,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "bread",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Cube the bread and toast lightly in a dry pan.",
+   "Temper curry leaves, fry onion, capsicum and tomato with salt and turmeric.",
+   "Fold in the bread cubes so they soak up the masala without going mushy."
+  ],
+  "rescue_note": "Designed for stale bread - fresh bread actually works worse here."
+ },
+ {
+  "id": "banana_pancake",
+  "title": "Banana Pancakes",
+  "cuisine": "Continental",
+  "meal": "breakfast",
+  "diet": "egg",
+  "minutes": 20,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "banana",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "atta",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "eggs",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "honey",
+    "grams": 30.0,
+    "optional": false
+   },
+   {
+    "id": "butter",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Mash very ripe bananas thoroughly.",
+   "Whisk with flour, milk and eggs to a thick batter.",
+   "Cook small pancakes in butter and serve with honey."
+  ],
+  "rescue_note": "The blacker the banana the better this gets - a true zero-waste recipe."
+ },
+ {
+  "id": "banana_smoothie",
+  "title": "Banana Almond Smoothie",
+  "cuisine": "Continental",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 5,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "banana",
+    "grams": 240.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "honey",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "almond",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Freeze overripe banana chunks in advance if you can.",
+   "Blend everything until thick and smooth."
+  ],
+  "rescue_note": "Freeze spotty bananas instead of binning them, then blend later."
+ },
+ {
+  "id": "mango_lassi",
+  "title": "Mango Lassi",
+  "cuisine": "North Indian",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 8,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "mango",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "sugar",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Peel and chop ripe mango.",
+   "Blend with curd, milk and sugar until frothy; chill before serving."
+  ],
+  "rescue_note": "Very soft mangoes are perfect here - texture stops mattering once blended."
+ },
+ {
+  "id": "fruit_chaat",
+  "title": "Fruit Chaat",
+  "cuisine": "Indian",
+  "meal": "snack",
+  "diet": "vegan",
+  "minutes": 10,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "banana",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "apple",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "guava",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "pomegranate",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "salt",
+    "grams": 3.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Dice all the fruit to a similar size.",
+   "Toss with lemon, salt and a pinch of roasted cumin."
+  ],
+  "rescue_note": "Combines several fruits that are each too far gone to eat plain."
+ },
+ {
+  "id": "apple_cinnamon_oats",
+  "title": "Apple Cinnamon Oats",
+  "cuisine": "Continental",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 12,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "oats",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "apple",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "honey",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "walnut",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Simmer oats in milk until creamy.",
+   "Grate in the apple for the last two minutes.",
+   "Top with honey and crushed walnuts."
+  ],
+  "rescue_note": "Grating rescues an apple that has gone soft or slightly bruised."
+ },
+ {
+  "id": "overnight_oats",
+  "title": "Overnight Oats",
+  "cuisine": "Continental",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 5,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "oats",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "banana",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "honey",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "almond",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Layer oats, curd, sliced banana and honey in a jar.",
+   "Refrigerate overnight; top with almonds before eating."
+  ],
+  "rescue_note": "Uses curd that is approaching its date - the tang is a feature."
+ },
+ {
+  "id": "paneer_tikka",
+  "title": "Paneer Tikka",
+  "cuisine": "North Indian",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 35,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "paneer",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Whisk curd with spices and lemon into a thick marinade.",
+   "Coat paneer, capsicum and onion chunks and rest 20 minutes.",
+   "Grill, air-fry or pan-char until edges blacken."
+  ],
+  "rescue_note": "Rescues paneer and a tired capsicum in the same dish."
+ },
+ {
+  "id": "veg_hakka_noodles",
+  "title": "Veg Hakka Noodles",
+  "cuisine": "Indo-Chinese",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 20,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "noodles",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "cabbage",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "spring_onion",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Boil noodles just until done, drain and toss with a little oil.",
+   "Stir-fry garlic and julienned vegetables on the highest heat for 3 minutes.",
+   "Add noodles and sauces, toss fast, finish with spring onion greens."
+  ],
+  "rescue_note": "Shredded vegetables cook so fast that even limp ones work."
+ },
+ {
+  "id": "pasta_arrabbiata",
+  "title": "Pasta Arrabbiata",
+  "cuisine": "Italian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "pasta",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 500.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "olive_oil",
+    "grams": 30.0,
+    "optional": false
+   },
+   {
+    "id": "cheese",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "chilli_powder",
+    "grams": 3.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Simmer chopped tomatoes with garlic, chilli and olive oil for 15 minutes until jammy.",
+   "Cook pasta and reserve a cup of the water.",
+   "Toss pasta in the sauce with a splash of pasta water; grate cheese over."
+  ],
+  "rescue_note": "Half a kilo of soft tomatoes disappears into this sauce."
+ },
+ {
+  "id": "white_sauce_pasta",
+  "title": "White Sauce Pasta",
+  "cuisine": "Italian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 30,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "pasta",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "butter",
+    "grams": 30.0,
+    "optional": false
+   },
+   {
+    "id": "maida",
+    "grams": 30.0,
+    "optional": false
+   },
+   {
+    "id": "cheese",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "broccoli",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Make a roux with butter and flour, whisk in milk to a smooth bechamel.",
+   "Melt in the cheese and season well.",
+   "Fold in boiled pasta and blanched vegetables."
+  ],
+  "rescue_note": "Excellent use for milk on its last day - cooking it removes the risk of it turning."
+ },
+ {
+  "id": "mushroom_masala",
+  "title": "Mushroom Masala",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegetarian",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "mushroom",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 12.0,
+    "optional": false
+   },
+   {
+    "id": "cream",
+    "grams": 40.0,
+    "optional": true
+   }
+  ],
+  "steps": [
+   "Dry-saute mushrooms first to drive off their water, then set aside.",
+   "Fry onion, garlic and tomato into a masala.",
+   "Return mushrooms with capsicum, add cream and simmer briefly."
+  ],
+  "rescue_note": "Mushrooms are the most perishable item in the catalog - use within two days."
+ },
+ {
+  "id": "rajma_chawal",
+  "title": "Rajma Chawal",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 60,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "rajma",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "rice",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 6.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Soak rajma overnight, then pressure cook until completely soft.",
+   "Build an onion, tomato and ginger masala and add the beans with their stock.",
+   "Simmer 20 minutes, mashing a few beans to thicken. Serve with rice."
+  ],
+  "rescue_note": "Pulses have long shelf lives - lean on them when fresh produce runs out."
+ },
+ {
+  "id": "chole_masala",
+  "title": "Chole Masala",
+  "cuisine": "North Indian",
+  "meal": "dinner",
+  "diet": "vegan",
+  "minutes": 60,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "chole",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 150.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 6.0,
+    "optional": false
+   },
+   {
+    "id": "tea",
+    "grams": 2.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Soak chickpeas overnight and boil with a tea bag for colour.",
+   "Cook an onion, tomato and ginger masala until the oil separates.",
+   "Add the chickpeas and stock, simmer 20 minutes."
+  ],
+  "rescue_note": "A pantry-only meal for the end of the week."
+ },
+ {
+  "id": "sprouts_salad",
+  "title": "Sprouts Salad",
+  "cuisine": "Indian",
+  "meal": "snack",
+  "diet": "vegan",
+  "minutes": 10,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "sprouts",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "tomato",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "cucumber",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 60.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 10.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Steam sprouts 4 minutes if you prefer them soft.",
+   "Toss with diced vegetables, lemon, salt and coriander."
+  ],
+  "rescue_note": "Sprouts spoil within days - eat them raw or steamed, fast."
+ },
+ {
+  "id": "cucumber_raita",
+  "title": "Cucumber Raita",
+  "cuisine": "Indian",
+  "meal": "lunch",
+  "diet": "vegetarian",
+  "minutes": 8,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "curd",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "cucumber",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "mint",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "salt",
+    "grams": 4.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Whisk curd smooth with a splash of water.",
+   "Grate cucumber, squeeze out excess water, and fold in with mint and salt."
+  ],
+  "rescue_note": "Sour curd is fine here once whisked with salt and mint."
+ },
+ {
+  "id": "beetroot_carrot_salad",
+  "title": "Beetroot Carrot Salad",
+  "cuisine": "South Indian",
+  "meal": "lunch",
+  "diet": "vegan",
+  "minutes": 15,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "beetroot",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "coconut",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "groundnut",
+    "grams": 30.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Grate beetroot and carrot.",
+   "Toss with lemon, salt, coconut and crushed roasted groundnuts."
+  ],
+  "rescue_note": "Root vegetables last weeks, so this is a reliable filler dish."
+ },
+ {
+  "id": "tomato_chutney",
+  "title": "Tomato Chutney",
+  "cuisine": "South Indian",
+  "meal": "condiment",
+  "diet": "vegan",
+  "minutes": 20,
+  "servings": 6,
+  "ingredients": [
+   {
+    "id": "tomato",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "garlic",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 25.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Fry garlic, chilli and curry leaves, add tomato and salt.",
+   "Cook down 12 minutes until thick and jammy, then blend coarsely."
+  ],
+  "rescue_note": "Turns a glut of soft tomatoes into something that keeps a week."
+ },
+ {
+  "id": "coriander_chutney",
+  "title": "Coriander Mint Chutney",
+  "cuisine": "Indian",
+  "meal": "condiment",
+  "diet": "vegan",
+  "minutes": 10,
+  "servings": 6,
+  "ingredients": [
+   {
+    "id": "coriander",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "mint",
+    "grams": 40.0,
+    "optional": false
+   },
+   {
+    "id": "coconut",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Blend everything with a little water and salt to a thick paste.",
+   "Freeze in an ice tray for portions that keep a month."
+  ],
+  "rescue_note": "The definitive rescue for herbs - and it freezes, which fresh herbs do not."
+ },
+ {
+  "id": "veg_cutlet",
+  "title": "Vegetable Cutlet",
+  "cuisine": "Indian",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 35,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "potato",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 100.0,
+    "optional": false
+   },
+   {
+    "id": "peas_fresh",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "bread",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "besan",
+    "grams": 40.0,
+    "optional": false
+   },
+   {
+    "id": "garam_masala",
+    "grams": 5.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Boil and mash potato with cooked carrot and peas.",
+   "Bind with breadcrumbs and besan, season well.",
+   "Shape patties and shallow fry until crisp."
+  ],
+  "rescue_note": "Absorbs odds and ends of vegetables plus the heel of a bread loaf."
+ },
+ {
+  "id": "dosa_from_batter",
+  "title": "Dosa with Potato Masala",
+  "cuisine": "South Indian",
+  "meal": "breakfast",
+  "diet": "vegan",
+  "minutes": 30,
+  "servings": 4,
+  "ingredients": [
+   {
+    "id": "batter",
+    "grams": 600.0,
+    "optional": false
+   },
+   {
+    "id": "potato",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "onion",
+    "grams": 120.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 30.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Temper curry leaves, fry onion, add boiled crumbled potato with turmeric and salt.",
+   "Spread batter thin on a hot tawa, drizzle oil and cook until crisp.",
+   "Fill and fold."
+  ],
+  "rescue_note": "Batter sours quickly - once it smells sharp, use it the same day."
+ },
+ {
+  "id": "curd_rice",
+  "title": "Curd Rice",
+  "cuisine": "South Indian",
+  "meal": "lunch",
+  "diet": "vegetarian",
+  "minutes": 15,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "cooked_rice",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 6.0,
+    "optional": false
+   },
+   {
+    "id": "ginger",
+    "grams": 10.0,
+    "optional": false
+   },
+   {
+    "id": "coconut",
+    "grams": 30.0,
+    "optional": true
+   }
+  ],
+  "steps": [
+   "Mash warm cooked rice slightly and cool it.",
+   "Fold in curd with salt.",
+   "Top with a tempering of curry leaves, chilli and ginger."
+  ],
+  "rescue_note": "Rescues leftover rice and sour curd together in one bowl."
+ },
+ {
+  "id": "dal_paratha",
+  "title": "Leftover Dal Paratha",
+  "cuisine": "North Indian",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 30,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "cooked_dal",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "atta",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "cooking_oil",
+    "grams": 30.0,
+    "optional": false
+   },
+   {
+    "id": "coriander",
+    "grams": 15.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Knead thick leftover dal directly into the flour with coriander - add no water until needed.",
+   "Rest the dough 15 minutes.",
+   "Roll and cook on a tawa with oil."
+  ],
+  "rescue_note": "Turns yesterday's dal into today's breakfast with zero waste."
+ },
+ {
+  "id": "roti_churma",
+  "title": "Roti Churma",
+  "cuisine": "Rajasthani",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 15,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "chapati_left",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "ghee",
+    "grams": 30.0,
+    "optional": false
+   },
+   {
+    "id": "jaggery",
+    "grams": 60.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Crush leftover rotis coarsely by hand or pulse briefly in a mixer.",
+   "Roast the crumbs in ghee until fragrant.",
+   "Stir in grated jaggery off the heat."
+  ],
+  "rescue_note": "A traditional dish invented specifically to use up dry leftover rotis."
+ },
+ {
+  "id": "veg_frittata",
+  "title": "Vegetable Frittata",
+  "cuisine": "Continental",
+  "meal": "dinner",
+  "diet": "egg",
+  "minutes": 25,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "eggs",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "potato",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "capsicum",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "spring_onion",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "cheese",
+    "grams": 50.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 60.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Par-cook sliced potato in a pan.",
+   "Beat eggs with milk, cheese and salt, pour over the vegetables.",
+   "Cook on low until almost set, then finish under a grill."
+  ],
+  "rescue_note": "A frittata will absorb almost any leftover cooked vegetable."
+ },
+ {
+  "id": "sweet_corn_soup",
+  "title": "Sweet Corn Soup",
+  "cuisine": "Indo-Chinese",
+  "meal": "lunch",
+  "diet": "vegan",
+  "minutes": 20,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "sweet_corn",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "carrot",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "cabbage",
+    "grams": 80.0,
+    "optional": false
+   },
+   {
+    "id": "maida",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "spring_onion",
+    "grams": 40.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Simmer corn and finely diced vegetables in stock for 10 minutes.",
+   "Blend a third of the corn and return it for body.",
+   "Thicken with a flour slurry and finish with spring onion."
+  ],
+  "rescue_note": "Uses the last of a cabbage and a couple of carrots."
+ },
+ {
+  "id": "papaya_smoothie",
+  "title": "Papaya Smoothie",
+  "cuisine": "Continental",
+  "meal": "breakfast",
+  "diet": "vegetarian",
+  "minutes": 6,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "papaya",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "honey",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 100.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Scoop out the papaya flesh, discarding seeds.",
+   "Blend with milk, curd and honey until silky."
+  ],
+  "rescue_note": "Very ripe papaya is too soft to slice but ideal to blend."
+ },
+ {
+  "id": "watermelon_cooler",
+  "title": "Watermelon Cooler",
+  "cuisine": "Indian",
+  "meal": "snack",
+  "diet": "vegan",
+  "minutes": 8,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "watermelon",
+    "grams": 600.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 25.0,
+    "optional": false
+   },
+   {
+    "id": "mint",
+    "grams": 15.0,
+    "optional": false
+   },
+   {
+    "id": "sugar",
+    "grams": 20.0,
+    "optional": true
+   }
+  ],
+  "steps": [
+   "Blend watermelon and strain lightly.",
+   "Add lemon, muddled mint and a little salt; serve over ice."
+  ],
+  "rescue_note": "Cut watermelon dries out fast - juice it before it does."
+ },
+ {
+  "id": "grape_yogurt_bowl",
+  "title": "Grape Yogurt Bowl",
+  "cuisine": "Continental",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 5,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "grapes",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "curd",
+    "grams": 200.0,
+    "optional": false
+   },
+   {
+    "id": "honey",
+    "grams": 20.0,
+    "optional": false
+   },
+   {
+    "id": "walnut",
+    "grams": 20.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Halve the grapes.",
+   "Layer with whisked curd, honey and crushed walnuts."
+  ],
+  "rescue_note": "Grapes that have gone soft still taste sweet in yogurt."
+ },
+ {
+  "id": "strawberry_milkshake",
+  "title": "Strawberry Milkshake",
+  "cuisine": "Continental",
+  "meal": "snack",
+  "diet": "vegetarian",
+  "minutes": 6,
+  "servings": 2,
+  "ingredients": [
+   {
+    "id": "strawberry",
+    "grams": 250.0,
+    "optional": false
+   },
+   {
+    "id": "milk",
+    "grams": 300.0,
+    "optional": false
+   },
+   {
+    "id": "sugar",
+    "grams": 25.0,
+    "optional": false
+   },
+   {
+    "id": "ice_cream",
+    "grams": 100.0,
+    "optional": true
+   }
+  ],
+  "steps": [
+   "Hull the strawberries, discarding only truly mouldy fruit.",
+   "Blend with cold milk and sugar until frothy."
+  ],
+  "rescue_note": "Strawberries last barely three days - blend them on day three."
+ },
+ {
+  "id": "lemon_rice",
+  "title": "Lemon Rice",
+  "cuisine": "South Indian",
+  "meal": "lunch",
+  "diet": "vegan",
+  "minutes": 15,
+  "servings": 3,
+  "ingredients": [
+   {
+    "id": "cooked_rice",
+    "grams": 400.0,
+    "optional": false
+   },
+   {
+    "id": "lemon",
+    "grams": 40.0,
+    "optional": false
+   },
+   {
+    "id": "groundnut",
+    "grams": 40.0,
+    "optional": false
+   },
+   {
+    "id": "curry_leaves",
+    "grams": 5.0,
+    "optional": false
+   },
+   {
+    "id": "turmeric",
+    "grams": 3.0,
+    "optional": false
+   },
+   {
+    "id": "green_chilli",
+    "grams": 8.0,
+    "optional": false
+   }
+  ],
+  "steps": [
+   "Temper groundnuts, curry leaves, chilli and turmeric in oil.",
+   "Fold in cold cooked rice gently so grains stay separate.",
+   "Finish with plenty of lemon juice off the heat."
+  ],
+  "rescue_note": "Second-best use of leftover rice after fried rice, and faster."
+ }
+]

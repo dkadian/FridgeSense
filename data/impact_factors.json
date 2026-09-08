@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "description": "Conversion and equivalence factors used by the FridgeSense impact engine.",
+    "note": "Per-food carbon, water and price factors live in food_catalog.csv. This file holds only the global constants used to translate saved food into human-readable equivalences.",
+    "sources": [
+      "Poore, J. & Nemecek, T. (2018). Reducing food's environmental impacts through producers and consumers. Science 360(6392) - cradle-to-retail GHG medians by food category.",
+      "Mekonnen, M.M. & Hoekstra, A.Y. (2011). The green, blue and grey water footprint of crops and derived crop products. Hydrology and Earth System Sciences 15 - total water footprints.",
+      "UNEP Food Waste Index Report 2024 - household food waste ~79 kg per capita per year; food waste responsible for 8-10% of global GHG emissions.",
+      "FAO (2011/2019) - roughly one third of food produced for human consumption is lost or wasted.",
+      "USDA FoodKeeper and FSSAI storage guidance - refrigerated and frozen shelf-life ranges.",
+      "India GHG Program / IPCC AR6 - passenger car emission intensity."
+    ]
+  },
+  "equivalences": {
+    "car_km_per_kg_co2e": 5.208,
+    "car_kg_co2e_per_km": 0.192,
+    "shower_litres": 65,
+    "phone_charge_kg_co2e": 0.0084,
+    "tree_kg_co2e_absorbed_per_year": 21.0,
+    "led_bulb_hours_per_kg_co2e": 1875.0,
+    "meal_grams": 420
+  },
+  "baselines": {
+    "household_waste_fraction_global": 0.22,
+    "household_waste_kg_per_capita_year": 79.0,
+    "india_waste_kg_per_capita_year": 55.0,
+    "note": "Used to compute the counterfactual 'what you would have wasted' baseline before a user has enough personal history."
+  },
+  "waste_reasons": [
+    "forgot_about_it",
+    "expired",
+    "cooked_too_much",
+    "bought_too_much",
+    "spoiled_early",
+    "did_not_like",
+    "stored_wrong",
+    "other"
+  ],
+  "risk_bands": [
+    {"band": "critical", "min": 0.70, "label": "Use today", "color": "#b3261e"},
+    {"band": "high", "min": 0.45, "label": "Use in 1-2 days", "color": "#c2610a"},
+    {"band": "medium", "min": 0.22, "label": "Plan this week", "color": "#8a6d0b"},
+    {"band": "low", "min": 0.0, "label": "Comfortable", "color": "#1f6f4a"}
+  ]
+}

@@ -1,0 +1,18 @@
+# Runtime -------------------------------------------------------------------
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+PyJWT==2.10.1
+numpy==2.2.1
+
+# The spoilage model, recipe index and receipt matcher are implemented from
+# scratch on NumPy, so nothing above is a machine-learning framework. The two
+# packages below are needed only to *retrain* and re-audit the model:
+#
+#   pip install scikit-learn matplotlib
+#
+# scikit-learn is used solely as an independent cross-check that our from-scratch
+# gradient booster reaches comparable AUC (see model_card.json ->
+# sklearn_crosscheck); the shipped model does not import it. matplotlib draws the
+# calibration and lift charts in ml/artifacts. Training degrades gracefully and
+# skips both if they are absent.

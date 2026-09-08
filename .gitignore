@@ -1,0 +1,144 @@
+# ==============================================================================
+# FridgeSense — Git Ignore Configuration
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Project Documents & PDFs (Binary Formats)
+# ------------------------------------------------------------------------------
+*.pdf
+*.docx
+*.doc
+FridgeSense_Project_Document.pdf
+FridgeSense_Project_Document.docx
+docs/*.pdf
+docs/*.docx
+
+# ------------------------------------------------------------------------------
+# 2. Environment Variables, Credentials & Secrets
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.pem
+*.key
+*.cert
+secret*.json
+credentials.json
+
+# ------------------------------------------------------------------------------
+# 3. Python Bytecode, Caches & Environments
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+backend/venv/
+env.bak/
+venv.bak/
+
+# ------------------------------------------------------------------------------
+# 4. Node.js, Frontend Dependencies & Build Outputs
+# ------------------------------------------------------------------------------
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+.next/
+out/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------------------------------------------
+# 5. Local Databases & Runtime Storage
+# ------------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+fridgesense.db
+backend/fridgesense.db
+*.log
+logs/
+
+# ------------------------------------------------------------------------------
+# 6. Video, Audio & Media Production Artifacts
+# ------------------------------------------------------------------------------
+*.mp4
+*.mov
+*.avi
+*.m4v
+*.mkv
+*.wav
+*.aiff
+*.mp3
+*.aac
+video_production/
+previews/
+
+# ------------------------------------------------------------------------------
+# 7. OS Generated & Editor Artifacts
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ------------------------------------------------------------------------------
+# 8. Temporary Files & Scratch Test Artifacts
+# ------------------------------------------------------------------------------
+*.tmp
+*.temp
+auto_auth.html
+login_scr.png
+snap_dashboard.png
+test_chrome.png

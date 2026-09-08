@@ -1,0 +1,114 @@
+id,name,category,perishability,storage_default,shelf_pantry,shelf_fridge,shelf_freezer,co2e_kg_per_kg,water_l_per_kg,price_inr_per_kg,unit,grams_per_unit,daily_g_per_person,keywords
+spinach,Spinach,leafy_greens,5,fridge,1,5,240,0.53,292,40,bunch,250,60,palak|spinach|baby spinach|saag
+methi,Fenugreek Leaves,leafy_greens,5,fridge,1,4,180,0.60,350,60,bunch,200,40,methi|fenugreek|kasuri
+coriander,Coriander Leaves,herbs,5,fridge,1,6,120,1.20,700,120,bunch,100,15,coriander|cilantro|dhania|hara dhania
+mint,Mint Leaves,herbs,5,fridge,1,7,120,1.20,700,150,bunch,80,10,mint|pudina
+curry_leaves,Curry Leaves,herbs,5,fridge,2,10,180,1.20,700,200,pack,50,5,curry leaves|kadi patta|curry patta
+lettuce,Lettuce,leafy_greens,5,fridge,1,7,-1,0.55,237,120,head,300,50,lettuce|iceberg|romaine
+amaranth,Amaranth Greens,leafy_greens,5,fridge,1,4,180,0.55,300,40,bunch,250,60,amaranth|chaulai|thotakura
+spring_onion,Spring Onion,vegetables,4,fridge,2,10,180,0.50,272,80,bunch,150,20,spring onion|scallion|hara pyaz
+tomato,Tomato,vegetables,4,fridge,4,10,240,1.40,214,40,kg,1000,80,tomato|tamatar|roma tomato
+cucumber,Cucumber,vegetables,4,fridge,3,8,-1,0.80,353,40,kg,1000,80,cucumber|kheera|khira
+capsicum,Capsicum,vegetables,3,fridge,4,12,240,1.60,379,80,kg,1000,50,capsicum|bell pepper|shimla mirch
+brinjal,Brinjal,vegetables,4,fridge,3,8,180,0.70,362,40,kg,1000,70,brinjal|eggplant|aubergine|baingan
+okra,Okra,vegetables,4,fridge,2,6,240,0.70,1400,60,kg,1000,70,okra|bhindi|ladys finger
+cauliflower,Cauliflower,vegetables,3,fridge,4,12,240,0.51,285,40,head,700,80,cauliflower|gobi|phool gobi
+cabbage,Cabbage,vegetables,2,fridge,7,30,180,0.51,237,30,head,900,80,cabbage|patta gobi
+broccoli,Broccoli,vegetables,4,fridge,3,10,300,0.70,285,150,head,400,70,broccoli
+carrot,Carrot,vegetables,2,fridge,10,28,300,0.43,195,60,kg,1000,60,carrot|gajar
+beetroot,Beetroot,vegetables,2,fridge,14,30,240,0.43,195,50,kg,1000,50,beetroot|beet|chukandar
+radish,Radish,vegetables,3,fridge,5,14,-1,0.43,288,30,kg,1000,50,radish|mooli|daikon
+peas_fresh,Green Peas,vegetables,4,fridge,2,7,300,0.98,595,80,kg,1000,60,green peas|matar|fresh peas
+beans_french,French Beans,vegetables,4,fridge,2,8,270,0.80,700,70,kg,1000,60,french beans|green beans|fansi
+bottle_gourd,Bottle Gourd,vegetables,3,fridge,5,14,-1,0.50,350,30,kg,1000,90,bottle gourd|lauki|dudhi
+ridge_gourd,Ridge Gourd,vegetables,4,fridge,3,8,-1,0.50,350,40,kg,1000,80,ridge gourd|turai|tori
+pumpkin,Pumpkin,vegetables,2,pantry,30,60,300,0.50,350,30,kg,1000,80,pumpkin|kaddu|sitaphal
+onion,Onion,vegetables,1,pantry,45,60,180,0.50,272,35,kg,1000,60,onion|pyaz|kanda|red onion
+potato,Potato,vegetables,1,pantry,40,-1,-1,0.46,287,30,kg,1000,100,potato|aloo|batata
+garlic,Garlic,vegetables,1,pantry,90,150,300,0.60,589,300,kg,1000,8,garlic|lehsun|lasan
+ginger,Ginger,vegetables,3,fridge,14,25,180,0.90,1757,120,kg,1000,10,ginger|adrak
+green_chilli,Green Chilli,vegetables,4,fridge,3,12,240,0.80,379,80,kg,1000,10,green chilli|hari mirch|chilli
+mushroom,Mushroom,vegetables,5,fridge,1,6,240,3.00,322,250,pack,200,50,mushroom|button mushroom|khumb
+sweet_corn,Sweet Corn,vegetables,4,fridge,2,7,300,0.70,1222,50,kg,1000,80,sweet corn|corn|bhutta|makka
+drumstick,Drumstick,vegetables,3,fridge,4,10,180,0.60,600,80,kg,1000,50,drumstick|moringa|sahjan
+banana,Banana,fruits,4,pantry,5,10,120,0.86,790,60,dozen,1200,120,banana|kela
+apple,Apple,fruits,2,fridge,7,35,180,0.43,822,180,kg,1000,150,apple|seb
+orange,Orange,fruits,3,fridge,7,21,180,0.39,560,100,kg,1000,150,orange|santra|malta
+mango,Mango,fruits,4,fridge,4,10,180,0.90,1800,100,kg,1000,150,mango|aam|alphonso
+grapes,Grapes,fruits,4,fridge,3,12,300,1.53,608,90,kg,1000,100,grapes|angoor
+papaya,Papaya,fruits,4,fridge,4,10,180,0.70,460,50,kg,1000,150,papaya|papita
+watermelon,Watermelon,fruits,3,fridge,7,14,180,0.50,235,25,kg,1000,200,watermelon|tarbooj
+pomegranate,Pomegranate,fruits,2,fridge,10,30,180,0.90,1000,180,kg,1000,120,pomegranate|anar
+guava,Guava,fruits,3,fridge,4,10,180,0.70,600,80,kg,1000,120,guava|amrud
+lemon,Lemon,fruits,2,fridge,10,30,120,0.39,642,100,kg,1000,15,lemon|nimbu|lime
+strawberry,Strawberry,fruits,5,fridge,1,4,270,1.53,347,400,pack,250,80,strawberry|strawberries
+milk,Milk,dairy,5,fridge,0,4,90,3.15,1020,60,litre,1030,250,milk|doodh|toned milk|full cream milk
+curd,Curd,dairy,4,fridge,0,8,-1,3.10,1300,80,pack,400,150,curd|yogurt|dahi|greek yogurt
+paneer,Paneer,dairy,5,fridge,0,5,90,10.50,3000,400,pack,200,80,paneer|cottage cheese
+cheese,Cheese,dairy,3,fridge,0,25,180,23.90,5060,600,pack,200,30,cheese|cheddar|mozzarella|processed cheese
+butter,Butter,dairy,2,fridge,0,45,270,12.00,5553,550,pack,500,20,butter|makkhan|amul butter
+ghee,Ghee,dairy,1,pantry,180,365,-1,12.00,5553,700,jar,500,15,ghee|clarified butter
+cream,Fresh Cream,dairy,5,fridge,0,5,60,7.00,3200,300,pack,200,30,cream|fresh cream|malai
+buttermilk,Buttermilk,dairy,5,fridge,0,4,-1,1.20,600,50,litre,1000,200,buttermilk|chaas|lassi
+eggs,Eggs,eggs,3,fridge,7,28,-1,4.50,3265,140,dozen,600,100,egg|eggs|anda
+chicken,Chicken,meat_fish,5,fridge,0,2,180,6.10,4325,240,kg,1000,150,chicken|murgi|chicken breast|boneless chicken
+mutton,Mutton,meat_fish,5,fridge,0,3,180,24.50,10412,750,kg,1000,150,mutton|goat|lamb|bakra
+fish,Fish,meat_fish,5,fridge,0,2,150,5.10,3000,350,kg,1000,150,fish|rohu|pomfret|surmai|machli
+prawns,Prawns,meat_fish,5,fridge,0,2,120,26.90,4000,500,kg,1000,120,prawns|shrimp|jhinga
+rice,Rice,grains,1,pantry,540,-1,-1,4.45,2497,60,kg,1000,120,rice|chawal|basmati|sona masoori
+atta,Wheat Flour,grains,1,pantry,180,240,-1,1.60,1827,45,kg,1000,120,atta|wheat flour|whole wheat|gehu
+maida,Refined Flour,grains,1,pantry,240,300,-1,1.60,1827,45,kg,1000,40,maida|all purpose flour|refined flour
+suji,Semolina,grains,1,pantry,180,270,-1,1.60,1827,50,kg,1000,50,suji|semolina|rava
+poha,Flattened Rice,grains,1,pantry,180,-1,-1,4.45,2497,60,kg,1000,60,poha|flattened rice|chivda
+oats,Oats,grains,1,pantry,365,-1,-1,2.50,1788,150,pack,1000,50,oats|rolled oats|oatmeal
+pasta,Pasta,grains,1,pantry,540,-1,-1,1.60,1849,150,pack,500,80,pasta|macaroni|penne|spaghetti
+noodles,Noodles,grains,1,pantry,240,-1,-1,1.60,1849,200,pack,280,80,noodles|maggi|instant noodles|hakka noodles
+bread,Bread,bakery,4,pantry,4,10,90,1.60,1608,75,loaf,400,80,bread|pav|brown bread|sandwich bread
+pav,Pav Buns,bakery,4,pantry,3,7,60,1.60,1608,80,pack,300,80,pav|buns|burger bun
+roti_pack,Packaged Roti,bakery,4,fridge,2,7,60,1.60,1827,120,pack,300,120,roti|chapati|paratha|tortilla
+toor_dal,Toor Dal,pulses,1,pantry,365,-1,-1,0.90,5874,160,kg,1000,60,toor dal|arhar|tur dal|pigeon pea
+moong_dal,Moong Dal,pulses,1,pantry,365,-1,-1,0.90,5874,120,kg,1000,60,moong dal|mung|green gram
+chana_dal,Chana Dal,pulses,1,pantry,365,-1,-1,0.80,4177,90,kg,1000,60,chana dal|bengal gram|split chickpea
+masoor_dal,Masoor Dal,pulses,1,pantry,365,-1,-1,0.90,5874,110,kg,1000,60,masoor|red lentil|lentils
+rajma,Kidney Beans,pulses,1,pantry,540,-1,-1,0.80,5053,140,kg,1000,60,rajma|kidney beans
+chole,Chickpeas,pulses,1,pantry,540,-1,-1,0.80,4177,100,kg,1000,60,chole|chickpeas|kabuli chana|garbanzo
+soya_chunks,Soya Chunks,pulses,1,pantry,270,-1,-1,3.16,2145,180,pack,500,50,soya chunks|soya|nutrela|textured soy
+tofu,Tofu,pulses,5,fridge,0,7,150,3.16,2500,300,pack,200,80,tofu|bean curd
+sprouts,Sprouts,pulses,5,fridge,1,4,-1,0.90,1500,120,pack,250,60,sprouts|moong sprouts|mixed sprouts
+cashew,Cashew,nuts_oils,1,pantry,180,365,365,2.30,14000,900,pack,250,20,cashew|kaju
+almond,Almond,nuts_oils,1,pantry,240,365,365,2.30,8000,800,pack,250,20,almond|badam
+groundnut,Groundnut,nuts_oils,1,pantry,180,270,365,1.80,2782,140,kg,1000,25,groundnut|peanut|moongfali
+walnut,Walnut,nuts_oils,1,pantry,120,270,365,2.30,4933,1200,pack,250,20,walnut|akhrot
+cooking_oil,Cooking Oil,nuts_oils,1,pantry,540,-1,-1,3.60,6792,140,litre,910,30,oil|sunflower oil|refined oil|cooking oil
+mustard_oil,Mustard Oil,nuts_oils,1,pantry,540,-1,-1,3.50,4300,180,litre,910,25,mustard oil|sarson oil|kachi ghani
+olive_oil,Olive Oil,nuts_oils,1,pantry,540,-1,-1,5.40,14431,900,bottle,500,15,olive oil|extra virgin
+coconut,Coconut,nuts_oils,3,pantry,20,45,180,0.90,2687,60,piece,500,40,coconut|nariyal|fresh coconut
+sugar,Sugar,condiments,1,pantry,900,-1,-1,3.20,1782,45,kg,1000,30,sugar|cheeni|shakkar
+jaggery,Jaggery,condiments,1,pantry,365,-1,-1,1.80,1500,70,kg,1000,20,jaggery|gur|gud
+salt,Salt,condiments,1,pantry,1800,-1,-1,0.15,50,25,kg,1000,8,salt|namak
+honey,Honey,condiments,1,pantry,720,-1,-1,2.00,3500,500,jar,500,15,honey|shahad
+tea,Tea,beverages,1,pantry,540,-1,-1,12.00,8856,500,pack,500,10,tea|chai|tea powder|green tea
+coffee,Coffee,beverages,1,pantry,365,-1,-1,28.50,18925,900,pack,200,12,coffee|filter coffee|instant coffee
+ketchup,Tomato Ketchup,condiments,2,fridge,90,180,-1,1.80,600,180,bottle,500,15,ketchup|tomato sauce|sauce
+pickle,Pickle,condiments,1,pantry,270,365,-1,1.50,800,250,jar,400,15,pickle|achar
+jam,Jam,condiments,2,fridge,120,240,-1,1.80,900,220,jar,500,20,jam|mixed fruit jam|marmalade
+mayonnaise,Mayonnaise,condiments,3,fridge,60,90,-1,3.50,1500,250,jar,250,15,mayonnaise|mayo|eggless mayo
+turmeric,Turmeric Powder,condiments,1,pantry,540,-1,-1,2.00,2500,250,pack,200,3,turmeric|haldi
+chilli_powder,Chilli Powder,condiments,1,pantry,540,-1,-1,2.00,2500,300,pack,200,3,chilli powder|lal mirch|red chilli
+garam_masala,Garam Masala,condiments,1,pantry,365,-1,-1,2.50,2500,600,pack,100,2,garam masala|masala|spice mix
+besan,Gram Flour,grains,1,pantry,180,270,-1,0.80,4177,110,kg,1000,40,besan|gram flour|chickpea flour
+frozen_peas,Frozen Peas,frozen,1,freezer,-1,3,300,1.10,595,120,pack,500,60,frozen peas|matar frozen
+frozen_veg,Frozen Mixed Veg,frozen,1,freezer,-1,3,300,0.90,500,140,pack,500,80,frozen vegetables|mixed veg frozen
+ice_cream,Ice Cream,frozen,1,freezer,-1,2,150,3.80,1500,250,tub,500,60,ice cream|kulfi
+biscuits,Biscuits,snacks,1,pantry,180,-1,-1,2.20,1700,200,pack,300,30,biscuits|cookies|parle|marie
+namkeen,Namkeen,snacks,1,pantry,120,-1,-1,3.00,2000,300,pack,200,25,namkeen|mixture|bhujia|chips
+chocolate,Chocolate,snacks,1,pantry,180,240,-1,19.00,17196,800,bar,100,20,chocolate|dairy milk|choco
+cake,Cake,bakery,4,fridge,3,7,60,2.60,1400,500,piece,500,60,cake|pastry|muffin
+sweets,Indian Sweets,bakery,5,fridge,1,5,-1,4.00,1800,600,box,500,50,sweets|mithai|laddu|barfi|rasgulla
+cooked_rice,Cooked Rice,cooked_leftovers,5,fridge,0,3,60,4.45,2497,80,bowl,200,200,cooked rice|leftover rice|pulao|fried rice
+cooked_dal,Cooked Dal,cooked_leftovers,5,fridge,0,3,60,0.90,5874,60,bowl,250,200,cooked dal|leftover dal|sambar
+cooked_sabzi,Cooked Vegetable,cooked_leftovers,5,fridge,0,3,45,1.20,600,70,bowl,200,180,sabzi|leftover curry|cooked vegetable
+cooked_curry,Cooked Curry,cooked_leftovers,5,fridge,0,2,45,6.50,3500,180,bowl,250,200,chicken curry|paneer curry|leftover gravy
+batter,Idli Dosa Batter,cooked_leftovers,5,fridge,0,5,30,2.00,2000,80,pack,1000,150,batter|idli batter|dosa batter
+chapati_left,Leftover Chapati,cooked_leftovers,5,fridge,1,3,30,1.60,1827,90,pack,200,150,leftover roti|leftover chapati
+pizza_left,Leftover Pizza,cooked_leftovers,5,fridge,0,3,45,3.00,1600,300,box,400,200,leftover pizza|pizza
