@@ -59,6 +59,20 @@ export default function Dashboard({ ctx }) {
     }
   }
 
+  async function quickRestock(st) {
+    setBusyId(st.item_id);
+    try {
+      const typicalGrams = st.predictive_horizon?.grams_initial || 1000;
+      await api.restock([{ food_id: st.food_id, name: st.name, typical_grams: typicalGrams }]);
+      toast.ok(`⚡ Restocked fresh ${st.name} (${Math.round(typicalGrams)}g) into your pantry!`);
+      await load();
+    } catch (e) {
+      toast.err(e.detail || `Couldn't restock ${st.name}.`);
+    } finally {
+      setBusyId(null);
+    }
+  }
+
   if (err) return <EmptyState icon="warn" title="Something went sideways" body={err} action={<button className="btn" onClick={load}>Try again</button>} />;
   if (!data || !impact) return <Loader label="Reading your fridge…" />;
 
@@ -119,6 +133,14 @@ export default function Dashboard({ ctx }) {
                   <button
                     className="btn btn--xs btn--primary"
                     disabled={busyId === st.item_id}
+                    title="1-tap restock fresh batch to pantry"
+                    onClick={() => quickRestock(st)}
+                  >
+                    ⚡ Restock
+                  </button>
+                  <button
+                    className="btn btn--xs btn--ghost"
+                    disabled={busyId === st.item_id}
                     onClick={() => calibrateStaple(st.item_id, { action: "mark_finished" }, st.name)}
                   >
                     ✓ Finished
@@ -128,7 +150,7 @@ export default function Dashboard({ ctx }) {
                     disabled={busyId === st.item_id}
                     onClick={() => calibrateStaple(st.item_id, { action: "adjust_days", days_delta: 2 }, st.name)}
                   >
-                    +2 days left
+                    +2d left
                   </button>
                 </div>
               </div>

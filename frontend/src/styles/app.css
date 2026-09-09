@@ -28,6 +28,7 @@
 .nav__badge { margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
   background: var(--hot); color: #fff; border-radius: 999px; min-width: 20px; height: 20px; padding: 0 6px;
   display: inline-flex; align-items: center; justify-content: center; }
+.nav__badge--teal { background: var(--fresh); color: var(--petrol-deep); font-weight: 700; }
 
 .sidebar__foot { margin-top: auto; display: flex; flex-direction: column; gap: var(--sp-3); }
 .who { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 10px; background: rgba(255,255,255,0.05); }
@@ -389,6 +390,10 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     line-height: 15px;
     text-align: center;
     box-shadow: 0 0 0 2px var(--paper);
+  }
+  .bottom-nav__badge--teal {
+    background: var(--fresh);
+    color: var(--petrol-deep);
   }
 
   /* Compact Topbar */

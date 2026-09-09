@@ -65,6 +65,27 @@ CREATE TABLE IF NOT EXISTS events (
 
 CREATE INDEX IF NOT EXISTS idx_events_user_time ON events(user_id, occurred_at);
 CREATE INDEX IF NOT EXISTS idx_events_user_type ON events(user_id, event_type);
+
+CREATE TABLE IF NOT EXISTS shopping_dismissals (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id      INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    food_id      TEXT NOT NULL,
+    dismissed_at TEXT NOT NULL,
+    UNIQUE(user_id, food_id)
+);
+CREATE INDEX IF NOT EXISTS idx_shopping_dismissals_user ON shopping_dismissals(user_id);
+
+CREATE TABLE IF NOT EXISTS custom_shopping_items (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    food_id     TEXT NOT NULL UNIQUE,
+    name        TEXT NOT NULL,
+    category    TEXT NOT NULL DEFAULT 'other',
+    grams       REAL NOT NULL DEFAULT 500,
+    unit        TEXT NOT NULL DEFAULT 'g',
+    created_at  TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_custom_shopping_user ON custom_shopping_items(user_id);
 """
 
 
@@ -85,6 +106,30 @@ def connect(path: str | None = None) -> sqlite3.Connection:
         pass
     try:
         conn.execute("ALTER TABLE pantry_items ADD COLUMN is_covered INTEGER NOT NULL DEFAULT 1")
+    except sqlite3.OperationalError:
+        pass
+    try:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS shopping_dismissals (
+            id           INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id      INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            food_id      TEXT NOT NULL,
+            dismissed_at TEXT NOT NULL,
+            UNIQUE(user_id, food_id)
+        )
+        """)
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS custom_shopping_items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            food_id     TEXT NOT NULL UNIQUE,
+            name        TEXT NOT NULL,
+            category    TEXT NOT NULL DEFAULT 'other',
+            grams       REAL NOT NULL DEFAULT 500,
+            unit        TEXT NOT NULL DEFAULT 'g',
+            created_at  TEXT NOT NULL
+        )
+        """)
     except sqlite3.OperationalError:
         pass
     return conn
@@ -112,6 +157,6 @@ def init_db(path: str | None = None) -> None:
 def reset_db(path: str | None = None) -> None:
     """Drops and recreates everything. Used by tests and the demo seeder."""
     with session(path) as conn:
-        for t in ("events", "pantry_items", "users"):
+        for t in ("events", "shopping_dismissals", "custom_shopping_items", "pantry_items", "users"):
             conn.execute("DROP TABLE IF EXISTS %s" % t)
         conn.executescript(SCHEMA)

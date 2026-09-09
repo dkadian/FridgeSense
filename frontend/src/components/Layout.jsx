@@ -10,6 +10,7 @@ import Icon from "./Icons.jsx";
 const NAV = [
   { to: "/", label: "Dashboard", icon: "dashboard", end: true, section: "Kitchen" },
   { to: "/pantry", label: "Pantry", icon: "fridge" },
+  { to: "/shopping", label: "Shopping list", icon: "cart" },
   { to: "/add", label: "Add & import", icon: "add" },
   { to: "/recipes", label: "Cook & rescue", icon: "recipe", section: "Act" },
   { to: "/impact", label: "Impact", icon: "impact" },
@@ -20,14 +21,15 @@ const NAV = [
 const BOTTOM_NAV = [
   { to: "/", label: "Home", icon: "dashboard", end: true },
   { to: "/pantry", label: "Pantry", icon: "fridge" },
+  { to: "/shopping", label: "Buy", icon: "cart" },
   { to: "/add", label: "Add", icon: "add" },
   { to: "/recipes", label: "Recipes", icon: "recipe" },
-  { to: "/impact", label: "Impact", icon: "impact" },
 ];
 
 const TITLES = {
   "/": ["Dashboard", "What to eat first, tonight"],
   "/pantry": ["Pantry", "Everything in your kitchen, ranked by spoilage risk"],
+  "/shopping": ["Shopping list", "Items that ran out in your kitchen — ready to buy"],
   "/add": ["Add & import", "Type an item or paste a shop receipt"],
   "/recipes": ["Cook & rescue", "Recipes ranked by how much at-risk food they use up"],
   "/impact": ["Impact", "Money, carbon and water — measured, not guessed"],
@@ -35,13 +37,28 @@ const TITLES = {
   "/model": ["The model", "How the spoilage score is made — and where it fails"],
 };
 
-export default function Layout({ criticalCount = 0 }) {
+export default function Layout({ criticalCount = 0, restockCount = 0 }) {
   const { user, logout } = useAuth();
   const toast = useToast();
   const nav = useNavigate();
   const loc = useLocation();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [localRestockCount, setLocalRestockCount] = useState(restockCount);
+
+  useEffect(() => {
+    setLocalRestockCount(restockCount);
+  }, [restockCount]);
+
+  useEffect(() => {
+    if (user) {
+      api.restockList()
+        .then((res) => {
+          if (res?.items) setLocalRestockCount(res.items.length);
+        })
+        .catch(() => {});
+    }
+  }, [user]);
 
   useEffect(() => { setOpen(false); }, [loc.pathname]);
 
@@ -78,6 +95,9 @@ export default function Layout({ criticalCount = 0 }) {
                   <I className="nav__icon" width={18} height={18} />
                   <span>{n.label}</span>
                   {n.to === "/" && criticalCount > 0 && <span className="nav__badge">{criticalCount}</span>}
+                  {n.to === "/shopping" && localRestockCount > 0 && (
+                    <span className="nav__badge nav__badge--teal">{localRestockCount}</span>
+                  )}
                 </NavLink>
               </div>
             );
@@ -125,6 +145,9 @@ export default function Layout({ criticalCount = 0 }) {
                   <I className="bottom-nav__icon" width={20} height={20} />
                   {n.to === "/" && criticalCount > 0 && (
                     <span className="bottom-nav__badge">{criticalCount}</span>
+                  )}
+                  {n.to === "/shopping" && localRestockCount > 0 && (
+                    <span className="bottom-nav__badge bottom-nav__badge--teal">{localRestockCount}</span>
                   )}
                 </div>
                 <span>{n.label}</span>

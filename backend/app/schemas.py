@@ -141,6 +141,12 @@ class ReceiptParseRequest(BaseModel):
     purchase_date: str | None = None
 
 
+class ScratchpadParseRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=20000, description="Unstructured grocery text or WhatsApp notes")
+    purchase_date: str | None = Field(None, description="Optional YYYY-MM-DD purchase date")
+
+
+
 class ReceiptConfirmItem(BaseModel):
     food_id: str
     grams: float = Field(..., gt=0, le=100000)
@@ -191,4 +197,19 @@ class AiCoachRequest(BaseModel):
 
 class AiKeyRequest(BaseModel):
     api_key: str = Field(..., max_length=200)
+
+
+class RestockItem(BaseModel):
+    food_id: str
+    name: str | None = None
+    grams: float | None = Field(None, gt=0, le=100000)
+    typical_grams: float | None = Field(None, gt=0, le=100000)
+    storage: str | None = None
+    container: str | None = "default"
+    is_covered: bool | None = True
+
+
+class RestockRequest(BaseModel):
+    items: list[RestockItem] = Field(..., min_length=1, max_length=100)
+    purchase_date: str | None = None
 

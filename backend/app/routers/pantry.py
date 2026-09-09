@@ -7,10 +7,18 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from ..deps import current_user, get_conn, get_kn
 from ..knowledge import Knowledge
 from ..repositories import items as items_repo
-from ..schemas import ItemBulkCreate, ItemCreate, ItemUpdate, ResolveRequest
-from ..services import pantry_service, risk_service
+from ..schemas import (
+    ItemBulkCreate,
+    ItemCreate,
+    ItemUpdate,
+    ResolveRequest,
+    RestockRequest,
+    ScratchpadParseRequest,
+)
+from ..services import pantry_service, risk_service, scratchpad_service
 
 router = APIRouter(prefix="/api/pantry", tags=["pantry"])
+
 
 
 def _bad_request(exc: Exception):
@@ -41,6 +49,58 @@ def add_bulk(payload: ItemBulkCreate, user: dict = Depends(current_user),
              kn: Knowledge = Depends(get_kn)):
     return pantry_service.add_many(
         conn, user["id"], [i.model_dump() for i in payload.items], kn)
+
+
+@router.post("/scratchpad", summary="Parse unstructured Hinglish text / WhatsApp notes into pantry candidates")
+def parse_scratchpad(payload: ScratchpadParseRequest, user: dict = Depends(current_user),
+                     kn: Knowledge = Depends(get_kn)):
+    return scratchpad_service.parse_scratchpad_notes(payload.text, kn, payload.purchase_date)
+
+
+@router.get("/restock-list", summary="Get prebuilt list of items previously bought that have run out")
+def restock_list(user: dict = Depends(current_user),
+                 conn: sqlite3.Connection = Depends(get_conn),
+                 kn: Knowledge = Depends(get_kn)):
+    items = pantry_service.get_restock_list(conn, user["id"], kn)
+    return {"items": items, "count": len(items)}
+
+
+@router.delete("/restock-list/{food_id}", summary="Dismiss an item from the restock list so it doesn't reappear")
+def dismiss_restock(food_id: str, user: dict = Depends(current_user),
+                    conn: sqlite3.Connection = Depends(get_conn)):
+    return pantry_service.dismiss_restock_item(conn, user["id"], food_id)
+
+
+@router.delete("/restock-list", summary="Clear/dismiss all current items from the restock list")
+def clear_restock(user: dict = Depends(current_user),
+                  conn: sqlite3.Connection = Depends(get_conn),
+                  kn: Knowledge = Depends(get_kn)):
+    return pantry_service.clear_restock_list(conn, user["id"], kn)
+
+
+@router.post("/shopping-list/custom", summary="Add a custom item to shopping list")
+def add_custom_shopping(payload: dict, user: dict = Depends(current_user),
+                        conn: sqlite3.Connection = Depends(get_conn),
+                        kn: Knowledge = Depends(get_kn)):
+    name = str(payload.get("name") or "").strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="Item name is required")
+    category = str(payload.get("category") or "other")
+    grams = float(payload.get("grams") or 500.0)
+    unit = str(payload.get("unit") or "g")
+    return pantry_service.add_custom_shopping_item(
+        conn, user["id"], name=name, category=category, grams=grams, unit=unit, kn=kn
+    )
+
+
+@router.post("/restock", status_code=status.HTTP_201_CREATED, summary="1-click restock items into pantry")
+def restock(payload: RestockRequest, user: dict = Depends(current_user),
+            conn: sqlite3.Connection = Depends(get_conn),
+            kn: Knowledge = Depends(get_kn)):
+    return pantry_service.restock_items(
+        conn, user["id"], [i.model_dump() for i in payload.items],
+        purchase_date=payload.purchase_date, kn=kn
+    )
 
 
 @router.get("/history", summary="Items already consumed, wasted or donated")

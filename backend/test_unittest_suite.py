@@ -5,7 +5,7 @@ import numpy as np
 from app import db
 from app.knowledge import get_knowledge
 from app.repositories import users as users_repo, items as items_repo, events as events_repo
-from app.services import risk_service, recipe_service, receipt_service, impact_service, insights_service
+from app.services import risk_service, recipe_service, receipt_service, impact_service, insights_service, scratchpad_service, pantry_service
 from app.ml.tfidf import TfidfVectorizer, cosine_similarity
 from app.ml.matcher import FuzzyLexiconMatcher
 
@@ -163,6 +163,103 @@ class TestFridgeSense(unittest.TestCase):
         self.assertLessEqual(uncovered["days_to_expiry"], poly["days_to_expiry"])
         self.assertEqual(uncovered["packaging_insight"]["tone"], "negative")
 
+    # 8. Text Scratchpad & Hinglish Parser Tests
+    def test_scratchpad_service_parsing(self):
+        from app.services import scratchpad_service
+        
+        # Test 1: Comma-separated list
+        text1 = "1 kg aloo, aadha kilo tamatar, do gaddi palak, 200g paneer"
+        res1 = scratchpad_service.parse_scratchpad_notes(text1, self.kn)
+        self.assertEqual(len(res1["items"]), 4)
+        items1 = {i["name"]: i for i in res1["items"]}
+        
+        self.assertIn("Potato", items1)
+        self.assertEqual(items1["Potato"]["grams"], 1000.0)
+        self.assertEqual(items1["Potato"]["container"], "paper_mesh")
+        
+        self.assertIn("Tomato", items1)
+        self.assertEqual(items1["Tomato"]["grams"], 500.0)
+        
+        self.assertIn("Spinach", items1)
+        self.assertEqual(items1["Spinach"]["grams"], 500.0)
+        self.assertEqual(items1["Spinach"]["container"], "airtight")
+        
+        self.assertIn("Paneer", items1)
+        self.assertEqual(items1["Paneer"]["grams"], 200.0)
+        self.assertEqual(items1["Paneer"]["container"], "airtight")
+        
+        # Test 2: Multiline numbered list with colloquial units (ek pav, dozen)
+        text2 = """1. ek pav hari mirch
+2. 100g adrak
+3. 1 dozen ande"""
+        res2 = scratchpad_service.parse_scratchpad_notes(text2, self.kn)
+        self.assertEqual(len(res2["items"]), 3)
+        items2 = {i["name"]: i for i in res2["items"]}
+        
+        self.assertEqual(items2["Green Chilli"]["grams"], 250.0)
+        self.assertEqual(items2["Ginger"]["grams"], 100.0)
+        self.assertEqual(items2["Eggs"]["grams"], 600.0)
+
+    def test_auto_retire_and_restock_list(self):
+        # 1. Add tomato and resolve it as consumed
+        item1 = pantry_service.add_item(
+            self.conn, self.user_id, "tomato", grams=500.0, kn=self.kn
+        )
+        self.assertEqual(len(items_repo.list_active(self.conn, self.user_id)), 1)
+        pantry_service.resolve_item(self.conn, self.user_id, item1["item_id"], "consumed", kn=self.kn)
+        self.assertEqual(len(items_repo.list_active(self.conn, self.user_id)), 0)
+
+        # 2. Check that tomato is now in the prebuilt restock list
+        restock = pantry_service.get_restock_list(self.conn, self.user_id, self.kn)
+        self.assertEqual(len(restock), 1)
+        self.assertEqual(restock[0]["food_id"], "tomato")
+        self.assertEqual(restock[0]["typical_grams"], 500.0)
+
+        # 3. 1-click restock tomato
+        res = pantry_service.restock_items(self.conn, self.user_id, [restock[0]], kn=self.kn)
+        self.assertEqual(res["added_count"], 1)
+
+        # Active items now has 1 tomato, and restock list is empty
+        active = items_repo.list_active(self.conn, self.user_id)
+        self.assertEqual(len(active), 1)
+        self.assertEqual(len(pantry_service.get_restock_list(self.conn, self.user_id, self.kn)), 0)
+
+        # 4. Now reduce active tomato stock to 20g (depleted), and add fresh 1000g tomato
+        items_repo.update(self.conn, self.user_id, active[0]["id"], grams_remaining=20.0)
+        pantry_service.add_item(self.conn, self.user_id, "tomato", grams=1000.0, kn=self.kn)
+
+        # Auto-retire should have archived the 20g batch, leaving only the fresh 1000g batch
+        active_after = items_repo.list_active(self.conn, self.user_id)
+        self.assertEqual(len(active_after), 1)
+        self.assertEqual(float(active_after[0]["grams_remaining"]), 1000.0)
+
+    def test_shopping_list_dismissal_and_persistence(self):
+        # 1. Add potato and resolve as consumed
+        it = pantry_service.add_item(self.conn, self.user_id, "potato", grams=800.0, kn=self.kn)
+        pantry_service.resolve_item(self.conn, self.user_id, it["item_id"], "consumed", kn=self.kn)
+        restock = pantry_service.get_restock_list(self.conn, self.user_id, self.kn)
+        self.assertTrue(any(x["food_id"] == "potato" for x in restock))
+
+        # 2. Dismiss potato -> must be excluded from restock list and not reappear
+        pantry_service.dismiss_restock_item(self.conn, self.user_id, "potato")
+        restock_after_dismiss = pantry_service.get_restock_list(self.conn, self.user_id, self.kn)
+        self.assertFalse(any(x["food_id"] == "potato" for x in restock_after_dismiss))
+
+        # 3. Add custom shopping item
+        custom = pantry_service.add_custom_shopping_item(
+            self.conn, self.user_id, "Chai Patti", category="beverages", grams=250.0, unit="g", kn=self.kn
+        )
+        self.assertEqual(custom["name"], "Chai Patti")
+        restock_with_custom = pantry_service.get_restock_list(self.conn, self.user_id, self.kn)
+        self.assertTrue(any(x["name"] == "Chai Patti" for x in restock_with_custom))
+
+        # 4. Clear restock list -> all items dismissed
+        pantry_service.clear_restock_list(self.conn, self.user_id, self.kn)
+        restock_cleared = pantry_service.get_restock_list(self.conn, self.user_id, self.kn)
+        self.assertEqual(len(restock_cleared), 0)
+
+
 if __name__ == "__main__":
     unittest.main()
+
 

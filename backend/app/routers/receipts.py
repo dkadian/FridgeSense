@@ -6,8 +6,13 @@ from fastapi import APIRouter, Depends, status
 
 from ..deps import current_user, get_conn, get_kn
 from ..knowledge import Knowledge
-from ..schemas import ImageParseRequest, ReceiptConfirmRequest, ReceiptParseRequest
-from ..services import llm_service, receipt_service
+from ..schemas import (
+    ImageParseRequest,
+    ReceiptConfirmRequest,
+    ReceiptParseRequest,
+    ScratchpadParseRequest,
+)
+from ..services import llm_service, receipt_service, scratchpad_service
 
 router = APIRouter(prefix="/api/receipt", tags=["receipt"])
 
@@ -19,9 +24,11 @@ def parse(payload: ReceiptParseRequest, user: dict = Depends(current_user),
 
 
 @router.post("/parse-text", summary="Parse unstructured Hinglish text / WhatsApp notes into pantry candidates")
-def parse_text(payload: ReceiptParseRequest, user: dict = Depends(current_user),
+@router.post("/scratchpad", summary="Parse unstructured Hinglish text / WhatsApp notes into pantry candidates")
+def parse_text(payload: ScratchpadParseRequest, user: dict = Depends(current_user),
                kn: Knowledge = Depends(get_kn)):
-    return llm_service.parse_hinglish_grocery_text(payload.text, kn, payload.purchase_date)
+    return scratchpad_service.parse_scratchpad_notes(payload.text, kn, payload.purchase_date)
+
 
 
 @router.post("/parse-image", summary="Multimodal vision inspection of grocery receipts or fridge shelves")

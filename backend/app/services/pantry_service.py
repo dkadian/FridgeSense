@@ -44,6 +44,52 @@ def default_expiry(food, storage: str, purchase: dt.date, container: str = "defa
     return storage_engine.calculate_expiry_date(food, storage, purchase, container, is_covered)
 
 
+def _auto_retire_depleted_batches(conn: sqlite3.Connection, user_id: int, food_id: str,
+                                  kn: Knowledge | None = None) -> list[int]:
+    """When fresh stock is added for a food, auto-resolve any older active batches
+    that are depleted (<= 50g, 0g, expired, or burned to 0 by predictive horizon)."""
+    kn = kn or get_knowledge()
+    today = dt.date.today()
+    ctx = risk_service.build_context(conn, user_id)
+    food = kn.food(food_id)
+
+    rows = conn.execute(
+        "SELECT * FROM pantry_items WHERE user_id = ? AND food_id = ? AND status = 'active'",
+        (user_id, food_id)
+    ).fetchall()
+
+    retired_ids = []
+    for r in rows:
+        grams_rem = float(r["grams_remaining"])
+        is_depleted = grams_rem <= 50.0
+
+        # Check staple horizon projection if applicable
+        if food and not is_depleted:
+            horizon = predictive_horizon.compute_predictive_horizon(r, food, ctx, today)
+            if horizon:
+                eff = float(horizon.get("effective_remaining_g", grams_rem))
+                if eff <= 50.0 or horizon.get("is_overdue") or horizon.get("days_remaining", 999) <= 0.2:
+                    is_depleted = True
+
+        # Check if expired in the past
+        if not is_depleted:
+            try:
+                exp = dt.date.fromisoformat(str(r["expiry_date"])[:10])
+                if exp < today:
+                    is_depleted = True
+            except ValueError:
+                pass
+
+        if is_depleted:
+            try:
+                resolve_item(conn, user_id, int(r["id"]), status="consumed", waste_reason="", kn=kn)
+                retired_ids.append(int(r["id"]))
+            except Exception:
+                pass
+
+    return retired_ids
+
+
 def add_item(conn: sqlite3.Connection, user_id: int, food_id: str, grams=None,
              count=None, storage: str | None = None, container: str | None = "default",
              is_covered: bool | None = True, purchase_date=None,
@@ -61,6 +107,11 @@ def add_item(conn: sqlite3.Connection, user_id: int, food_id: str, grams=None,
             food = matches[0]
     if food is None:
         raise PantryError("Unknown food: %r. Please select a valid item from the catalog." % food_id)
+
+    # Auto-retire any previous depleted or run-out batches of this food
+    _auto_retire_depleted_batches(conn, user_id, food.id, kn=kn)
+    conn.execute("DELETE FROM shopping_dismissals WHERE user_id = ? AND food_id = ?", (user_id, food.id))
+    conn.execute("DELETE FROM custom_shopping_items WHERE user_id = ? AND food_id = ?", (user_id, food.id))
 
     storage = (storage or food.storage_default).lower()
     if storage not in STORAGES:
@@ -384,3 +435,200 @@ def calibrate_horizon(conn: sqlite3.Connection, user_id: int, item_id: int,
     updated = items_repo.get(conn, user_id, item_id)
     scored = risk_service.score_items([updated], ctx, kn)
     return scored[0]
+
+
+def get_restock_list(conn: sqlite3.Connection, user_id: int, kn: Knowledge | None = None) -> list[dict]:
+    """Returns a list of items previously bought by the user that are currently
+    out of stock (over/consumed/depleted) and ready for prebuilt 1-click replenishment."""
+    kn = kn or get_knowledge()
+    today = dt.date.today()
+    ctx = risk_service.build_context(conn, user_id)
+
+    # 1. Active items currently well-stocked
+    active_rows = items_repo.list_active(conn, user_id)
+    active_stock: dict[str, float] = {}
+    for r in active_rows:
+        fid = r["food_id"]
+        food = kn.food(fid)
+        g = float(r["grams_remaining"])
+        if food:
+            h = predictive_horizon.compute_predictive_horizon(r, food, ctx, today)
+            if h:
+                g = min(g, float(h.get("effective_remaining_g", g)))
+        active_stock[fid] = active_stock.get(fid, 0.0) + g
+
+    # Food IDs that have more than 60g in the kitchen right now
+    in_stock_fids = {fid for fid, total_g in active_stock.items() if total_g > 60.0}
+
+    # Food IDs explicitly dismissed by the user from their shopping list
+    dismissed_fids = {
+        row["food_id"]
+        for row in conn.execute(
+            "SELECT food_id FROM shopping_dismissals WHERE user_id = ?",
+            (user_id,)
+        ).fetchall()
+    }
+
+    # 2. Query all past items bought by this user, ordered by most recent first
+    history_rows = conn.execute(
+        "SELECT id, food_id, display_name, category, grams_initial, storage, container, is_covered, "
+        "purchase_date, resolved_at, status FROM pantry_items WHERE user_id = ? "
+        "ORDER BY COALESCE(resolved_at, purchase_date) DESC, id DESC",
+        (user_id,)
+    ).fetchall()
+
+    seen_fids = set()
+    restock_items = []
+
+    for r in history_rows:
+        fid = r["food_id"]
+        if fid in seen_fids or fid in in_stock_fids or fid in dismissed_fids:
+            continue
+        seen_fids.add(fid)
+
+        food = kn.food(fid)
+        cat = str(r["category"] or (food.category if food else "other")).lower()
+
+        # Exclude home-cooked meals and leftovers - they cannot be bought in a grocery store!
+        if cat in ("cooked_leftovers", "cooked", "leftovers") or fid.startswith("cooked_") or fid.endswith("_left"):
+            continue
+
+        name = r["display_name"] or (food.name if food else fid)
+        storage = r["storage"] or (food.storage_default if food else "fridge")
+        container = r["container"] if ("container" in r.keys() and r["container"]) else "default"
+
+        # Typical purchase quantity based on past habits
+        typical_grams = float(r["grams_initial"]) if r["grams_initial"] else (float(food.grams_per_unit) if food else 500.0)
+
+        # Estimated cost
+        price_per_kg = float(food.price_inr_per_kg) if food else 40.0
+        est_cost = round((typical_grams / 1000.0) * price_per_kg, 1)
+
+        # Is bulk staple?
+        is_staple = predictive_horizon.is_bulk_staple(fid, cat, typical_grams)
+
+        restock_items.append({
+            "food_id": fid,
+            "name": name,
+            "category": cat,
+            "typical_grams": round(typical_grams, 1),
+            "unit": food.unit if food else "g",
+            "storage": storage,
+            "container": container,
+            "is_staple": is_staple,
+            "is_custom": False,
+            "last_purchase_date": str(r["purchase_date"])[:10],
+            "resolved_at": str(r["resolved_at"])[:10] if r["resolved_at"] else None,
+            "estimated_cost_inr": est_cost,
+        })
+
+    # 3. Include user-added custom shopping items
+    custom_rows = conn.execute(
+        "SELECT food_id, name, category, grams, unit FROM custom_shopping_items WHERE user_id = ? ORDER BY id DESC",
+        (user_id,)
+    ).fetchall()
+    for cr in custom_rows:
+        cfid = cr["food_id"]
+        if cfid in seen_fids or cfid in in_stock_fids or cfid in dismissed_fids:
+            continue
+        seen_fids.add(cfid)
+        food = kn.food(cfid)
+        price_per_kg = float(food.price_inr_per_kg) if food else 50.0
+        c_grams = float(cr["grams"] or 500.0)
+        est_cost = round((c_grams / 1000.0) * price_per_kg, 1)
+        restock_items.append({
+            "food_id": cfid,
+            "name": cr["name"],
+            "category": cr["category"] or "other",
+            "typical_grams": c_grams,
+            "unit": cr["unit"] or "g",
+            "storage": "fridge",
+            "container": "default",
+            "is_staple": False,
+            "is_custom": True,
+            "last_purchase_date": None,
+            "resolved_at": None,
+            "estimated_cost_inr": est_cost,
+        })
+
+    # Sort staples first, then most recently resolved items
+    restock_items.sort(key=lambda x: (not x["is_staple"], -(x["estimated_cost_inr"] or 0)))
+    return restock_items
+
+
+def dismiss_restock_item(conn: sqlite3.Connection, user_id: int, food_id: str) -> dict:
+    """Permanently dismisses an item from the restock/shopping list until manually re-added or purchased."""
+    now = dt.datetime.utcnow().isoformat()
+    conn.execute(
+        "INSERT OR REPLACE INTO shopping_dismissals (user_id, food_id, dismissed_at) "
+        "VALUES (?, ?, ?)",
+        (user_id, food_id, now)
+    )
+    conn.execute(
+        "DELETE FROM custom_shopping_items WHERE user_id = ? AND food_id = ?",
+        (user_id, food_id)
+    )
+    return {"dismissed": True, "food_id": food_id}
+
+
+def clear_restock_list(conn: sqlite3.Connection, user_id: int, kn: Knowledge | None = None) -> dict:
+    """Dismisses all current restock items for the user and clears custom items."""
+    current = get_restock_list(conn, user_id, kn)
+    now = dt.datetime.utcnow().isoformat()
+    for item in current:
+        conn.execute(
+            "INSERT OR REPLACE INTO shopping_dismissals (user_id, food_id, dismissed_at) "
+            "VALUES (?, ?, ?)",
+            (user_id, item["food_id"], now)
+        )
+    conn.execute("DELETE FROM custom_shopping_items WHERE user_id = ?", (user_id,))
+    return {"cleared": True, "count": len(current)}
+
+
+def add_custom_shopping_item(conn: sqlite3.Connection, user_id: int, name: str,
+                             category: str = "other", grams: float = 500.0,
+                             unit: str = "g", kn: Knowledge | None = None) -> dict:
+    kn = kn or get_knowledge()
+    food = kn.match_catalog(name)
+    fid = food.id if food else f"custom_{int(dt.datetime.utcnow().timestamp()*1000)}"
+    cat = category if category != "other" else (food.category if food else "other")
+    now = dt.datetime.utcnow().isoformat()
+
+    # Un-dismiss if it was previously dismissed
+    conn.execute("DELETE FROM shopping_dismissals WHERE user_id = ? AND food_id = ?", (user_id, fid))
+
+    conn.execute(
+        "INSERT OR REPLACE INTO custom_shopping_items (user_id, food_id, name, category, grams, unit, created_at) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (user_id, fid, name, cat, float(grams), unit, now)
+    )
+    return {
+        "food_id": fid,
+        "name": name,
+        "category": cat,
+        "typical_grams": float(grams),
+        "unit": unit,
+        "is_custom": True,
+    }
+
+
+def restock_items(conn: sqlite3.Connection, user_id: int, items: list[dict],
+                  purchase_date: str | None = None, kn: Knowledge | None = None) -> dict:
+    """Restocks one or more items from the prebuilt list into active pantry."""
+    kn = kn or get_knowledge()
+    today = (purchase_date or dt.date.today().isoformat())[:10]
+    entries = []
+    for it in items:
+        entries.append({
+            "food_id": it["food_id"],
+            "display_name": it.get("name"),
+            "grams": it.get("grams") or it.get("typical_grams", 500.0),
+            "storage": it.get("storage"),
+            "container": it.get("container", "default"),
+            "is_covered": it.get("is_covered", True),
+            "purchase_date": today,
+        })
+        # Clear dismissal and custom item now that it has been restocked
+        conn.execute("DELETE FROM shopping_dismissals WHERE user_id = ? AND food_id = ?", (user_id, it["food_id"]))
+        conn.execute("DELETE FROM custom_shopping_items WHERE user_id = ? AND food_id = ?", (user_id, it["food_id"]))
+    return add_many(conn, user_id, entries, kn)

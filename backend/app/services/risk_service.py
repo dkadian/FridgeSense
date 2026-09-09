@@ -614,7 +614,8 @@ def score_pantry(conn: sqlite3.Connection, user_id: int, kn: Knowledge | None = 
     ctx = build_context(conn, user_id)
     rows = items_repo.list_active(conn, user_id)
     scored = score_items(rows, ctx, kn, today)
-    scored.sort(key=lambda s: (-s["risk"], s["days_to_expiry"]))
+    # Prioritize items that actually have edible food remaining over 0g ghost rows
+    scored.sort(key=lambda s: (s["grams_remaining"] <= 0, -s["risk"], s["days_to_expiry"]))
     return scored
 
 
@@ -633,14 +634,37 @@ def pantry_summary(scored: list[dict], kn: Knowledge | None = None) -> dict:
     bands = {b["band"]: 0 for b in kn.risk_bands()}
     for s in scored:
         bands[s["risk_band"]] = bands.get(s["risk_band"], 0) + 1
-    at_risk = [s for s in scored if s["risk"] >= 0.45]
-    staples_tracked = [s for s in scored if s.get("predictive_horizon")]
-    staples_near_empty = [s for s in staples_tracked if s["predictive_horizon"].get("is_near_empty")]
+    at_risk = [s for s in scored if s["risk"] >= 0.45 and s["grams_remaining"] > 0]
+
+    # Group staples by food_id to assess household-wide real stock
+    staples_by_food: dict[str, list[dict]] = {}
+    for s in scored:
+        if s.get("predictive_horizon"):
+            fid = s["food_id"]
+            staples_by_food.setdefault(fid, []).append(s)
+
+    staples_near_empty = []
+    for fid, batch_items in staples_by_food.items():
+        total_effective_g = sum(b["predictive_horizon"]["effective_remaining_g"] for b in batch_items)
+        daily_burn = batch_items[0]["predictive_horizon"]["daily_burn_g"]
+        total_days_remaining = total_effective_g / daily_burn if daily_burn > 0 else 0.0
+
+        # Only flag if total household stock of this staple is critically low
+        if total_days_remaining <= 1.5:
+            # Pick representative item
+            rep_item = dict(min(batch_items, key=lambda b: b["predictive_horizon"]["effective_remaining_g"]))
+            rep_horizon = dict(rep_item["predictive_horizon"])
+            rep_horizon["effective_remaining_g"] = round(total_effective_g, 1)
+            rep_horizon["days_remaining"] = round(total_days_remaining, 1)
+            rep_item["predictive_horizon"] = rep_horizon
+            rep_item["grams_remaining"] = round(total_effective_g, 1)
+            staples_near_empty.append(rep_item)
+
     return {
         "items_active": len(scored),
         "band_counts": bands,
         "items_at_risk": len(at_risk),
-        "staples_tracked_count": len(staples_tracked),
+        "staples_tracked_count": len(staples_by_food),
         "staples_near_empty": staples_near_empty,
         "expected_loss_kg": round(sum(s["risk"] * s["grams_remaining"] for s in scored) / 1000.0, 3),
         "expected_loss_co2e_kg": round(sum(s["at_risk_co2e_kg"] for s in scored), 3),

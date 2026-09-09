@@ -8,6 +8,7 @@ import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Pantry from "./pages/Pantry.jsx";
 import AddImport from "./pages/AddImport.jsx";
+import ShoppingList from "./pages/ShoppingList.jsx";
 import Recipes from "./pages/Recipes.jsx";
 import RecipeDetail from "./pages/RecipeDetail.jsx";
 import Impact from "./pages/Impact.jsx";
@@ -25,14 +26,16 @@ function RequireAuth({ children }) {
 export default function App() {
   const { user, ready } = useAuth();
   const [criticalCount, setCriticalCount] = useState(0);
-  const ctx = { setCriticalCount };
+  const [restockCount, setRestockCount] = useState(0);
+  const ctx = { setCriticalCount, restockCount, setRestockCount };
 
   return (
     <Routes>
       <Route path="/login" element={ready && user ? <Navigate to="/" replace /> : <Login />} />
-      <Route element={<RequireAuth><Layout criticalCount={criticalCount} /></RequireAuth>}>
+      <Route element={<RequireAuth><Layout criticalCount={criticalCount} restockCount={restockCount} /></RequireAuth>}>
         <Route index element={<Dashboard ctx={ctx} />} />
         <Route path="pantry" element={<Pantry ctx={ctx} />} />
+        <Route path="shopping" element={<ShoppingList ctx={ctx} />} />
         <Route path="add" element={<AddImport />} />
         <Route path="recipes" element={<Recipes />} />
         <Route path="recipes/:id" element={<RecipeDetail />} />

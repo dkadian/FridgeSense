@@ -17,18 +17,28 @@ CURD 400G          45.00
 BANANA 1 DOZEN     60.00
 CORIANDER BUNCH     15.00`;
 
-export default function AddImport() {
+export default function AddImport({ ctx }) {
   const [mode, setMode] = useState("manual");
   return (
     <div className="stack" style={{ gap: "var(--sp-5)" }}>
       <div className="seg seg--lg">
-        <button className={mode === "manual" ? "is-on" : ""} onClick={() => setMode("manual")}><Icon.add width={16} height={16} /> Add by hand</button>
-        <button className={mode === "receipt" ? "is-on" : ""} onClick={() => setMode("receipt")}><Icon.receipt width={16} height={16} /> Paste a receipt</button>
+        <button className={mode === "manual" ? "is-on" : ""} onClick={() => setMode("manual")}>
+          <Icon.add width={16} height={16} /> Add by hand
+        </button>
+        <button className={mode === "scratchpad" ? "is-on" : ""} onClick={() => setMode("scratchpad")}>
+          <Icon.sparkles width={16} height={16} /> Quick Text / WhatsApp
+        </button>
+        <button className={mode === "receipt" ? "is-on" : ""} onClick={() => setMode("receipt")}>
+          <Icon.receipt width={16} height={16} /> Paste a receipt
+        </button>
       </div>
-      {mode === "manual" ? <ManualAdd /> : <ReceiptImport />}
+      {mode === "manual" && <ManualAdd />}
+      {mode === "scratchpad" && <TextScratchpad />}
+      {mode === "receipt" && <ReceiptImport />}
     </div>
   );
 }
+
 
 
 
@@ -308,7 +318,6 @@ function ManualAdd() {
             <label className="field__label">Food item</label>
             <input
               className="input"
-              autoFocus
               placeholder="e.g. spinach, paneer, atta, milk…"
               value={q}
               onChange={handleInputChange}
@@ -629,3 +638,352 @@ function ReceiptImport() {
     </div>
   );
 }
+
+/* ------------------------------------------------------------- scratchpad */
+function TextScratchpad({ initialText, onClearInitialText }) {
+  const toast = useToast();
+  const nav = useNavigate();
+  const [text, setText] = useState(initialText || "");
+  const [parsed, setParsed] = useState(null);
+  const [rows, setRows] = useState([]);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (initialText) {
+      setText(initialText);
+      onClearInitialText?.();
+    }
+  }, [initialText, onClearInitialText]);
+
+  const SAMPLES = [
+    { label: "🥔 Perishables & Paneer", text: "1 kg aloo, aadha kilo tamatar, do gaddi palak, 200g paneer" },
+    { label: "🥛 Daily Dairy & Eggs", text: "2 packet doodh, 1 dozen ande, 100g adrak, 500g dahi" },
+    { label: "🥦 Veggies & Chillies", text: "ek pav hari mirch, 1 phool gobi, 250g matar, 500g gajar" },
+  ];
+
+  async function parse() {
+    if (!text.trim()) return;
+    setBusy(true);
+    try {
+      const res = await api.parseScratchpad(text);
+      if (!res.items || res.items.length === 0) {
+        toast.err("Could not recognize any grocery items. Try simpler names like '1kg aloo, 500g tamatar'.");
+        return;
+      }
+      setParsed(res);
+      setRows(
+        (res.items || []).map((it) => ({
+          ...it,
+          include: true,
+          container: it.container || "default",
+        }))
+      );
+    } catch (e) {
+      toast.err(e.detail || "Couldn't parse that grocery text.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function edit(i, patch) {
+    setRows((r) => r.map((row, idx) => (idx === i ? { ...row, ...patch } : row)));
+  }
+
+  function remove(i) {
+    setRows((r) => r.filter((_, idx) => idx !== i));
+  }
+
+  function toggleAll(checked) {
+    setRows((r) => r.map((row) => ({ ...row, include: checked })));
+  }
+
+  async function confirm() {
+    const chosen = rows
+      .filter((r) => r.include)
+      .map((r) => ({
+        food_id: r.food_id,
+        grams: Number(r.grams),
+        storage: r.storage,
+        container: r.container || "default",
+        is_covered: true,
+        purchase_date: r.purchase_date,
+        expiry_date: r.expiry_date,
+        display_name: r.name,
+      }));
+
+    if (!chosen.length) {
+      toast.err("Tick at least one item to add to your pantry.");
+      return;
+    }
+
+    setBusy(true);
+    try {
+      const res = await api.addBulk(chosen);
+      toast.ok(`Added ${res.added_count} item${res.added_count === 1 ? "" : "s"} to your pantry!`);
+      if (res.failed_count) {
+        toast.err(`${res.failed_count} item(s) could not be saved.`);
+      }
+      nav("/pantry");
+    } catch (e) {
+      toast.err(e.detail || "Couldn't save those items to pantry.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const allSelected = rows.length > 0 && rows.every((r) => r.include);
+
+  if (!parsed) {
+    return (
+      <div className="grid-2">
+        <section className="card">
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", marginBottom: "var(--sp-2)" }}>
+            <span style={{ fontSize: "1.2rem" }}>📝</span>
+            <h3 className="card__title" style={{ margin: 0 }}>Quick Text / WhatsApp Scratchpad</h3>
+          </div>
+          <p className="muted small" style={{ marginBottom: "var(--sp-3)" }}>
+            Paste informal notes, WhatsApp grocery messages, or quick Hinglish lists.
+          </p>
+
+          <div style={{ marginBottom: "var(--sp-3)" }}>
+            <span className="small muted" style={{ display: "block", marginBottom: 6 }}>Try an example note:</span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {SAMPLES.map((s, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  className="btn btn--ghost"
+                  style={{ fontSize: "0.78rem", padding: "4px 10px", borderRadius: "999px" }}
+                  onClick={() => setText(s.text)}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="field__label">Grocery Notes / WhatsApp Text</label>
+            <textarea
+              className="input textarea"
+              rows={8}
+              placeholder="Paste anything like:&#10;1 kg aloo, aadha kilo tamatar, do gaddi palak, 200g paneer&#10;Or list line-by-line:&#10;• 2 packet doodh&#10;• 1 dozen ande&#10;• ek pav hari mirch"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              style={{ fontFamily: "inherit", lineHeight: 1.5 }}
+            />
+            <span className="field__hint">
+              Supports comma-separated or line-by-line lists. Recognizes Hinglish (aadha kilo, ek pav, gaddi, darjan, packet).
+            </span>
+          </div>
+
+          <div className="inline" style={{ marginTop: "var(--sp-2)" }}>
+            <button
+              className="btn btn--primary"
+              disabled={busy || !text.trim()}
+              onClick={parse}
+            >
+              {busy ? "Parsing Groceries…" : "Parse Groceries"}
+            </button>
+            {text && (
+              <button className="btn btn--ghost" onClick={() => setText("")}>
+                Clear
+              </button>
+            )}
+          </div>
+        </section>
+
+        <section className="card card--muted">
+          <h3 className="card__title">How the Scratchpad Works</h3>
+          <div className="stack" style={{ gap: "var(--sp-3)", marginTop: "var(--sp-2)" }}>
+            <div style={{ display: "flex", gap: "var(--sp-2)" }}>
+              <span style={{ fontSize: "1.1rem" }}>🇮🇳</span>
+              <div>
+                <strong>Colloquial Indian Unit Conversions</strong>
+                <p className="muted small" style={{ margin: "2px 0 0" }}>
+                  Automatically translates kitchen terms: <em>aadha kilo</em> (500g), <em>ek pav</em> (250g), <em>derh kilo</em> (1.5kg), <em>gaddi</em> (bunch), <em>darjan</em> (dozen).
+                </p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "var(--sp-2)" }}>
+              <span style={{ fontSize: "1.1rem" }}>🥫</span>
+              <div>
+                <strong>Packaging & Storage Co-Pilot</strong>
+                <p className="muted small" style={{ margin: "2px 0 0" }}>
+                  Assigns optimal container preservation physics (Airtight for greens & paneer, Steel Dabba for dairy, Paper/Mesh for potatoes & onions).
+                </p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "var(--sp-2)" }}>
+              <span style={{ fontSize: "1.1rem" }}>⚡</span>
+              <div>
+                <strong>1-Click Review & Pantry Sync</strong>
+                <p className="muted small" style={{ margin: "2px 0 0" }}>
+                  Preview all parsed items in an interactive table, adjust weights or containers if needed, and add them all with a single click.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  const st = parsed.stats || {};
+  const isAi = parsed.mode === "gemini_live";
+
+  return (
+    <div className="stack" style={{ gap: "var(--sp-4)" }}>
+      <Banner
+        tone="ok"
+        icon="check"
+        title={`Extracted ${rows.length} item${rows.length === 1 ? "" : "s"} from your note`}
+        body={
+          <span>
+            {isAi ? "🤖 Powered by Google Gemini 2.5 Flash." : "⚡ Processed via Indian Colloquial Rules."}{" "}
+            Total: <strong>{g(st.total_grams || 0)}</strong>
+            {st.total_value_inr ? ` · Approx. ${inr(st.total_value_inr)}` : ""}
+            {" · Review items below before adding to pantry."}
+          </span>
+        }
+      />
+
+      <div className="review">
+        <table className="table review__table">
+          <thead>
+            <tr>
+              <th style={{ width: 36 }}>
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={(e) => toggleAll(e.target.checked)}
+                  title="Select all / Deselect all"
+                />
+              </th>
+              <th>Item</th>
+              <th style={{ width: 110 }}>Grams</th>
+              <th style={{ width: 110 }}>Storage</th>
+              <th style={{ width: 160 }}>Container</th>
+              <th>Source / Shelf-life</th>
+
+              <th style={{ width: 40 }}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr key={i} className={r.include ? "" : "row--muted"}>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={r.include}
+                    onChange={(e) => edit(i, { include: e.target.checked })}
+                  />
+                </td>
+                <td>
+                  <div className="cell-name">{r.name}</div>
+                  <div className="muted mono cell-sub" style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                    <span style={{ textTransform: "capitalize" }}>{r.category.replace("_", " ")}</span>
+                    <span>·</span>
+                    <span>{r.raw}</span>
+                  </div>
+                </td>
+                <td>
+                  <input
+                    className="input input--sm mono"
+                    type="number"
+                    min={1}
+                    value={Math.round(r.grams)}
+                    onChange={(e) => edit(i, { grams: Number(e.target.value) })}
+                    style={{ width: "100%" }}
+                  />
+                </td>
+                <td>
+                  <select
+                    className="select select--sm"
+                    value={r.storage}
+                    onChange={(e) => edit(i, { storage: e.target.value })}
+                  >
+                    {["fridge", "pantry", "freezer"].map((s) => (
+                      <option key={s} value={s}>{titleCase(s)}</option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <select
+                    className="select select--sm"
+                    value={r.container || "default"}
+                    onChange={(e) => edit(i, { container: e.target.value })}
+                  >
+                    <option value="default">📦 Original</option>
+                    <option value="airtight">🫙 Airtight</option>
+                    <option value="steel_dabba">🍱 Steel Dabba</option>
+                    <option value="polythene">🛍️ Polybag</option>
+                    <option value="paper_mesh">🧺 Paper/Mesh</option>
+                    <option value="open">🥣 Open Plate</option>
+                  </select>
+                </td>
+                <td>
+                  <div className="small" style={{ color: "var(--ink-soft)" }}>
+                    {r.grams_source}
+                  </div>
+                  <div className="muted small mono">
+                    ~{r.shelf_life_days}d shelf life
+                  </div>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn--ghost"
+                    onClick={() => remove(i)}
+                    title="Remove item"
+                    style={{ padding: "4px 8px", color: "var(--hot)", fontSize: "0.85rem" }}
+                  >
+                    ✕
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {parsed.unmatched?.length > 0 && (
+        <div style={{ background: "var(--warm-wash)", border: "1px solid var(--warm-med)", borderRadius: "var(--r-md)", padding: "var(--sp-3)" }}>
+          <strong style={{ color: "var(--warm-high)", fontSize: "0.88rem" }}>⚠️ Unmatched lines ({parsed.unmatched.length}):</strong>
+          <ul style={{ margin: "4px 0 0 16px", fontSize: "0.84rem", color: "var(--ink-soft)" }}>
+            {parsed.unmatched.map((u, idx) => (
+              <li key={idx}><code>{u.text || u.raw}</code> — {u.reason}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="inline" style={{ justifyContent: "space-between", alignItems: "center" }}>
+        <div className="inline">
+          <button
+            className="btn btn--primary"
+            disabled={busy || rows.filter((r) => r.include).length === 0}
+            onClick={confirm}
+          >
+            {busy
+              ? "Adding to Pantry…"
+              : `Add ${rows.filter((r) => r.include).length} Item${rows.filter((r) => r.include).length === 1 ? "" : "s"} to Pantry`}
+          </button>
+          <button
+            className="btn btn--ghost"
+            onClick={() => { setParsed(null); setRows([]); }}
+          >
+            Edit Note / Start Over
+          </button>
+        </div>
+
+        <span className="muted small">
+          Selected: {rows.filter((r) => r.include).length} of {rows.length}
+        </span>
+      </div>
+    </div>
+  );
+}
+
